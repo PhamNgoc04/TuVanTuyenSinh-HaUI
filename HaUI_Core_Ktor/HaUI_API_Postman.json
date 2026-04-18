@@ -1,0 +1,330 @@
+﻿{
+  "info": {
+    "name": "HaUI Tuyen Sinh API Collection",
+    "description": "Toan bo API test cho he thong Tu van Tuyen sinh - DH Cong nghiep Ha Noi",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080", "type": "string" },
+    { "key": "token", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "0. AUTH - Xac Thuc",
+      "item": [
+        {
+          "name": "Dang Nhap (Admin)",
+          "event": [{ "listen": "test", "script": { "exec": ["if (pm.response.code === 200) { var res = pm.response.json(); pm.collectionVariables.set('token', res.token); console.log('Token da luu:', res.token); }"], "type": "text/javascript" } }],
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"P@ssw0rd123\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/login", "host": ["{{baseUrl}}"], "path": ["api","v1","auth","login"] }
+          }
+        },
+        {
+          "name": "Dang Nhap (Sinh Vien)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"sinhvien1\",\n  \"password\": \"sv123456\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/login", "host": ["{{baseUrl}}"], "path": ["api","v1","auth","login"] }
+          }
+        },
+        {
+          "name": "Dang Nhap Sai Mat Khau",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"sai123\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/login", "host": ["{{baseUrl}}"], "path": ["api","v1","auth","login"] }
+          }
+        },
+        {
+          "name": "Dang Ky Tai Khoan Moi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"username\": \"testuser99\",\n  \"password\": \"test123456\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/auth/register", "host": ["{{baseUrl}}"], "path": ["api","v1","auth","register"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "1. TRUONG - Thong Tin Truong",
+      "item": [
+        {
+          "name": "Xem Thong Tin Truong HaUI",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/truong", "host": ["{{baseUrl}}"], "path": ["api","v1","truong"] }
+          }
+        },
+        {
+          "name": "Danh Sach Tin Tuc Tuyen Sinh",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/truong/tin-tuc", "host": ["{{baseUrl}}"], "path": ["api","v1","truong","tin-tuc"] }
+          }
+        },
+        {
+          "name": "Danh Sach Nganh Hoc (qua Truong)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/truong/nganh-hoc", "host": ["{{baseUrl}}"], "path": ["api","v1","truong","nganh-hoc"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2. NGANH HOC - Chi Tiet",
+      "item": [
+        {
+          "name": "Danh Sach Tat Ca Nganh Hoc",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/nganh-hoc", "host": ["{{baseUrl}}"], "path": ["api","v1","nganh-hoc"] }
+          }
+        },
+        {
+          "name": "Chi Tiet Nganh CNTT",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/nganh-hoc/7480201", "host": ["{{baseUrl}}"], "path": ["api","v1","nganh-hoc","7480201"] }
+          }
+        },
+        {
+          "name": "Chi Tiet Nganh Khoa Hoc May Tinh",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/nganh-hoc/7480101", "host": ["{{baseUrl}}"], "path": ["api","v1","nganh-hoc","7480101"] }
+          }
+        },
+        {
+          "name": "Nghe Nghiep Lien Quan (CNTT)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/nganh-hoc/7480201/nghe-nghiep", "host": ["{{baseUrl}}"], "path": ["api","v1","nganh-hoc","7480201","nghe-nghiep"] }
+          }
+        },
+        {
+          "name": "Chi Tieu Tuyen Sinh (CNTT)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/nganh-hoc/7480201/chi-tieu", "host": ["{{baseUrl}}"], "path": ["api","v1","nganh-hoc","7480201","chi-tieu"] }
+          }
+        },
+        {
+          "name": "Diem Xet Tuyen - Khoi Thi (CNTT)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/nganh-hoc/7480201/yeu-cau-dau-vao", "host": ["{{baseUrl}}"], "path": ["api","v1","nganh-hoc","7480201","yeu-cau-dau-vao"] }
+          }
+        },
+        {
+          "name": "Gia Tin Chi (CNTT)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/nganh-hoc/7480201/tin-chi", "host": ["{{baseUrl}}"], "path": ["api","v1","nganh-hoc","7480201","tin-chi"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3. HOC PHI & HOC BONG",
+      "item": [
+        {
+          "name": "Thong Tin Hoc Phi",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/hoc-phi", "host": ["{{baseUrl}}"], "path": ["api","v1","hoc-phi"] }
+          }
+        },
+        {
+          "name": "Danh Sach Hoc Bong",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/hoc-bong", "host": ["{{baseUrl}}"], "path": ["api","v1","hoc-bong"] }
+          }
+        },
+        {
+          "name": "Chuong Trinh Hoc (Dai Tra - CLC - Tien Tien)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/chuong-trinh-hoc", "host": ["{{baseUrl}}"], "path": ["api","v1","chuong-trinh-hoc"] }
+          }
+        },
+        {
+          "name": "Quy Trinh Nhap Hoc (5 buoc)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{baseUrl}}/api/v1/quy-trinh-nhap-hoc", "host": ["{{baseUrl}}"], "path": ["api","v1","quy-trinh-nhap-hoc"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "4. NGUOI DUNG - Ho So",
+      "item": [
+        {
+          "name": "Xem Ho So (theo TaiKhoan TK001)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/nguoi-dung/TK001", "host": ["{{baseUrl}}"], "path": ["api","v1","nguoi-dung","TK001"] }
+          }
+        },
+        {
+          "name": "Cap Nhat Thong Tin Ho So",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"ten\": \"Nguyen Van An (Updated)\",\n  \"email\": \"nva_new@haui.edu.vn\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/nguoi-dung/ND002", "host": ["{{baseUrl}}"], "path": ["api","v1","nguoi-dung","ND002"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "5. ADMIN - Quan Ly He Thong",
+      "item": [
+        {
+          "name": "Xem Danh Sach Tai Khoan",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/tai-khoan", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","tai-khoan"] }
+          }
+        },
+        {
+          "name": "Xem Thong Tin Truong (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/truong", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","truong"] }
+          }
+        },
+        {
+          "name": "Chinh Sua Thong Tin Truong",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenTruong\": \"Dai hoc Cong nghiep Ha Noi (HaUI) - Cap nhat 2024\",\n  \"duong\": \"So 298 duong Cau Dien, Bac Tu Liem\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/truong/DCN", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","truong","DCN"] }
+          }
+        },
+        {
+          "name": "Them Nganh Hoc Moi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"maNganh\": \"7480999\",\n  \"tenNganh\": \"Nganh Test Moi\",\n  \"moTa\": \"Day la mo ta nganh test\",\n  \"coSo\": \"Co so Cau Dien\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/nganh-hoc", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","nganh-hoc"] }
+          }
+        },
+        {
+          "name": "Chinh Sua Nganh Hoc CNTT",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"tenNganh\": \"Cong nghe Thong tin (cap nhat)\",\n  \"moTa\": \"Mo ta moi cap nhat cho nganh CNTT\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/nganh-hoc/7480201", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","nganh-hoc","7480201"] }
+          }
+        },
+        {
+          "name": "Them Tin Tuc Moi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"id\": \"TT009\",\n  \"tieuDe\": \"Tin tuc test tu Postman\",\n  \"moTa\": \"Day la mo ta ngan\",\n  \"noiDung\": \"Noi dung bai viet day du...\",\n  \"truongMaTruong\": \"DCN\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/tin-tuc", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","tin-tuc"] }
+          }
+        },
+        {
+          "name": "Them Hoc Bong Moi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"loaiHb\": \"Hoc bong Test ABC Corp\",\n  \"diemYc\": \"3.5/4.0\",\n  \"hanhKiemYc\": \"Tot\",\n  \"chuongTrinhHocId\": \"CTH001\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/hoc-bong", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","hoc-bong"] }
+          }
+        },
+        {
+          "name": "Them Hoc Phi Moi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"soTien\": \"15.000.000 - 17.000.000 dong/nam\",\n  \"namHoc\": \"2025-2026\",\n  \"chuongTrinhHocId\": \"CTH001\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/hoc-phi", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","hoc-phi"] }
+          }
+        },
+        {
+          "name": "Them Phuong Thuc Xet Tuyen Moi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }, { "key": "Authorization", "value": "Bearer {{token}}" }],
+            "body": { "mode": "raw", "raw": "{\n  \"khoi\": \"B08 (Toan, Sinh, Anh)\",\n  \"diemTong\": \"21.5\",\n  \"nganhHocMaNganh\": \"7480201\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/yeu-cau-dau-vao", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","yeu-cau-dau-vao"] }
+          }
+        },
+        {
+          "name": "Xoa Nganh Test (7480999)",
+          "request": {
+            "method": "DELETE",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "{{baseUrl}}/api/v1/admin/nganh-hoc/7480999", "host": ["{{baseUrl}}"], "path": ["api","v1","admin","nganh-hoc","7480999"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "6. AI SERVICE (port 8000)",
+      "item": [
+        {
+          "name": "Health Check AI Service",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "http://localhost:8000/", "raw": "http://localhost:8000/" }
+          }
+        },
+        {
+          "name": "Hoi Chatbot - Hoc Phi",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"text\": \"hoc phi nganh CNTT la bao nhieu\"\n}" },
+            "url": { "raw": "http://localhost:8000/api/v1/ai/ask", "raw": "http://localhost:8000/api/v1/ai/ask" }
+          }
+        },
+        {
+          "name": "Hoi Chatbot - Diem Chuan",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"text\": \"diem chuan nganh cong nghe thong tin\"\n}" },
+            "url": { "raw": "http://localhost:8000/api/v1/ai/ask", "raw": "http://localhost:8000/api/v1/ai/ask" }
+          }
+        },
+        {
+          "name": "Hoi Chatbot - Hoc Bong",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"text\": \"truong co hoc bong gi khong\"\n}" },
+            "url": { "raw": "http://localhost:8000/api/v1/ai/ask", "raw": "http://localhost:8000/api/v1/ai/ask" }
+          }
+        },
+        {
+          "name": "Hoi Chatbot - Phuong Thuc Xet Tuyen",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"text\": \"phuong thuc xet tuyen nam 2024\"\n}" },
+            "url": { "raw": "http://localhost:8000/api/v1/ai/ask", "raw": "http://localhost:8000/api/v1/ai/ask" }
+          }
+        }
+      ]
+    }
+  ]
+}

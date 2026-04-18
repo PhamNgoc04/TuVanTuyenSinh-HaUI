@@ -1,0 +1,22 @@
+﻿[
+  {
+    "questions": ["Học phí Đại học Công nghiệp Hà Nội là bao nhiêu?", "hoc phi nganh cntt", "truong minh thu hoc phi bao nhieu"],
+    "answer": "Học phí Đại học Công nghiệp Hà Nội (HaUI) dao động từ 18 - 25 triệu đồng/năm học tùy thuộc vào ngành nghề và số tín chỉ bạn đăng ký."
+  },
+  {
+    "questions": ["Điểm chuẩn ngành Công nghệ thông tin là bao nhiêu?", "diem chuan nganh cntt la bn", "lay bao nhieu diem vao truong"],
+    "answer": "Điểm chuẩn ngành CNTT năm vừa qua là 25.5 điểm đối với phương thức xét điểm thi THPT. Điểm học bạ thường từ 28 điểm trở lên."
+  },
+  {
+    "questions": ["Trường có những cơ sở nào? Địa chỉ ở đâu?", "dia chi truong o dau", "truong co may tru so"],
+    "answer": "HaUI hiện có 3 cơ sở: Cơ sở 1 tại 298 đường Cầu Diễn, Bắc Từ Liêm, HN; Cơ sở 2 tại phường Tây Tựu, Bắc Từ Liêm, HN; và Cơ sở 3 tại Hà Nam."
+  },
+  {
+    "questions": ["Có những phương thức xét tuyển nào?", "phuong thuc xet tuyen la gi", "truong co xet hoc ba khong"],
+    "answer": "Trường tuyển sinh theo 5 phương thức: 1. Tuyển thẳng; 2. Xét thí sinh giỏi tuyến tỉnh/quốc gia; 3. Xét kết quả thi đánh giá năng lực ĐHQGHN; 4. Xét điểm thi THPT; 5. Xét học bạ THPT."
+  },
+  {
+    "questions": ["Sinh viên có được học bổng không, điều kiện là gì?", "truong co hoc bong gi khong", "dieu kien nhan hoc bong"],
+    "answer": "Sinh viên đạt kết quả học tập và rèn luyện từ loại Khá trở lên (GPA > 2.5), không bị nợ môn thì sẽ được xét học bổng khuyến khích học tập theo học kỳ."
+  }
+]

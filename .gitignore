@@ -1,0 +1,43 @@
+# ===== Tránh Commit File nặng, Log và Rác =====
+*.log
+*.zip
+*.tar
+*.gz
+*.apk
+*.aab
+hs_err_pid*.log
+replay_pid*.log
+scratch/
+
+# ===== IntelliJ IDEA / Android Studio =====
+*.iml
+.gradle/
+.idea/
+.DS_Store
+build/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ===== Python AI Service =====
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+ENV/
+env/
+.env
+
+# Android Specific
+app/build/
+HaUI_TuyenSinh_Android/build/
+HaUI_TuyenSinh_Android/app/build/
+HaUI_TuyenSinh_Android/.gradle/
+HaUI_TuyenSinh_Android/.idea/
+HaUI_TuyenSinh_Android/local.properties
+
+# Ktor Specific
+HaUI_Core_Ktor/build/
+HaUI_Core_Ktor/.gradle/
+HaUI_Core_Ktor/.idea/
