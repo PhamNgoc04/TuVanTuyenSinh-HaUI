@@ -65,6 +65,7 @@ interface ApiService {
     @GET("/api/v1/admin/tai-khoan")
     fun getTaiKhoanAdmin(): Call<AdminTaiKhoanResponse>
 
+    // --- Nganh Hoc ---
     @POST("/api/v1/admin/nganh-hoc")
     fun addNganhHocAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
@@ -74,6 +75,7 @@ interface ApiService {
     @DELETE("/api/v1/admin/nganh-hoc/{ma}")
     fun deleteNganhHocAdmin(@Path("ma") ma: String): Call<GenericResponse>
 
+    // --- Tin Tuc ---
     @POST("/api/v1/admin/tin-tuc")
     fun addTinTucAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
@@ -83,41 +85,76 @@ interface ApiService {
     @DELETE("/api/v1/admin/tin-tuc/{id}")
     fun deleteTinTucAdmin(@Path("id") id: String): Call<GenericResponse>
 
+    // --- Truong ---
     @PUT("/api/v1/admin/truong/{ma}")
     fun updateTruongAdmin(@Path("ma") ma: String, @Body body: Map<String, String>): Call<GenericResponse>
 
+    // --- Hoc Phi ---
     @POST("/api/v1/admin/hoc-phi")
     fun addHocPhiAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
     @PUT("/api/v1/admin/hoc-phi/{id}")
     fun updateHocPhiAdmin(@Path("id") id: String, @Body body: Map<String, String>): Call<GenericResponse>
 
+    @DELETE("/api/v1/admin/hoc-phi/{id}")
+    fun deleteHocPhiAdmin(@Path("id") id: String): Call<GenericResponse>
+
+    // --- Quy Trinh ---
     @POST("/api/v1/admin/quy-trinh")
     fun addQuyTrinhAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
     @PUT("/api/v1/admin/quy-trinh/{id}")
     fun updateQuyTrinhAdmin(@Path("id") id: String, @Body body: Map<String, String>): Call<GenericResponse>
 
-    // ===== ADMIN: HOC BONG =====
+    @DELETE("/api/v1/admin/quy-trinh/{id}")
+    fun deleteQuyTrinhAdmin(@Path("id") id: String): Call<GenericResponse>
+
+    // --- Hoc Bong ---
     @POST("/api/v1/admin/hoc-bong")
     fun addHocBongAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
-    // ===== ADMIN: CHI TIEU =====
+    @PUT("/api/v1/admin/hoc-bong/{id}")
+    fun updateHocBongAdmin(@Path("id") id: String, @Body body: Map<String, String>): Call<GenericResponse>
+
+    @DELETE("/api/v1/admin/hoc-bong/{id}")
+    fun deleteHocBongAdmin(@Path("id") id: String): Call<GenericResponse>
+
+    // --- Chi Tieu (nested under nganh) ---
     @POST("/api/v1/admin/chi-tieu")
     fun addChiTieuAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
-    // ===== ADMIN: NGHE NGHIEP =====
+    @PUT("/api/v1/admin/chi-tieu/{id}")
+    fun updateChiTieuAdmin(@Path("id") id: String, @Body body: Map<String, String>): Call<GenericResponse>
+
+    @DELETE("/api/v1/admin/chi-tieu/{id}")
+    fun deleteChiTieuAdmin(@Path("id") id: String): Call<GenericResponse>
+
+    // --- Nghe Nghiep ---
     @POST("/api/v1/admin/nghe-nghiep")
     fun addNgheNghiepAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
-    // ===== ADMIN: PHUONG THUC XET TUYEN =====
+    @PUT("/api/v1/admin/nghe-nghiep/{id}")
+    fun updateNgheNghiepAdmin(@Path("id") id: String, @Body body: Map<String, String>): Call<GenericResponse>
+
+    @DELETE("/api/v1/admin/nghe-nghiep/{id}")
+    fun deleteNgheNghiepAdmin(@Path("id") id: String): Call<GenericResponse>
+
+    // --- Phuong Thuc Xet Tuyen ---
+    @GET("/api/v1/phuong-thuc-xet-tuyen")
+    fun getPhuongThucXetTuyen(): Call<PhuongThucListResponse>
+
     @POST("/api/v1/admin/phuong-thuc-xet-tuyen")
     fun addPhuongThucAdmin(@Body body: Map<String, String>): Call<GenericResponse>
 
-}
+    @PUT("/api/v1/admin/phuong-thuc-xet-tuyen/{id}")
+    fun updatePhuongThucAdmin(@Path("id") id: String, @Body body: Map<String, String>): Call<GenericResponse>
 
+    @DELETE("/api/v1/admin/phuong-thuc-xet-tuyen/{id}")
+    fun deletePhuongThucAdmin(@Path("id") id: String): Call<GenericResponse>
+}
 
 interface AiApiService {
     @POST("/api/v1/ai/ask")
     fun askAI(@Body request: AiChatRequest): Call<AiChatResponse>
 }
+

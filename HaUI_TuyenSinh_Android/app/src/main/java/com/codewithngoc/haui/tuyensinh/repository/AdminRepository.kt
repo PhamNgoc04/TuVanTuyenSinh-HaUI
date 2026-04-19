@@ -3,39 +3,51 @@ package com.codewithngoc.haui.tuyensinh.repository
 import com.codewithngoc.haui.tuyensinh.network.ApiClient
 
 class AdminRepository {
-    fun getTaiKhoan() = ApiClient.instance.getTaiKhoanAdmin()
+    private val api = ApiClient.instance
 
-    // Nganh Hoc
-    fun addNganhHoc(body: Map<String, String>) = ApiClient.instance.addNganhHocAdmin(body)
-    fun updateNganhHoc(ma: String, body: Map<String, String>) = ApiClient.instance.updateNganhHocAdmin(ma, body)
-    fun deleteNganhHoc(ma: String) = ApiClient.instance.deleteNganhHocAdmin(ma)
+    fun getTaiKhoan() = api.getTaiKhoanAdmin()
 
-    // Tin Tuc
-    fun addTinTuc(body: Map<String, String>) = ApiClient.instance.addTinTucAdmin(body)
-    fun updateTinTuc(id: String, body: Map<String, String>) = ApiClient.instance.updateTinTucAdmin(id, body)
-    fun deleteTinTuc(id: String) = ApiClient.instance.deleteTinTucAdmin(id)
+    // ===== Nganh Hoc =====
+    fun addNganhHoc(body: Map<String, String>) = api.addNganhHocAdmin(body)
+    fun updateNganhHoc(ma: String, body: Map<String, String>) = api.updateNganhHocAdmin(ma, body)
+    fun deleteNganhHoc(ma: String) = api.deleteNganhHocAdmin(ma)
 
-    // Truong
-    fun updateTruong(ma: String, body: Map<String, String>) = ApiClient.instance.updateTruongAdmin(ma, body)
+    // ===== Tin Tuc =====
+    fun addTinTuc(body: Map<String, String>) = api.addTinTucAdmin(body)
+    fun updateTinTuc(id: String, body: Map<String, String>) = api.updateTinTucAdmin(id, body)
+    fun deleteTinTuc(id: String) = api.deleteTinTucAdmin(id)
 
-    // Hoc Phi
-    fun addHocPhi(body: Map<String, String>) = ApiClient.instance.addHocPhiAdmin(body)
-    fun updateHocPhi(id: String, body: Map<String, String>) = ApiClient.instance.updateHocPhiAdmin(id, body)
+    // ===== Truong =====
+    fun updateTruong(ma: String, body: Map<String, String>) = api.updateTruongAdmin(ma, body)
 
-    // Quy Trinh
-    fun addQuyTrinh(body: Map<String, String>) = ApiClient.instance.addQuyTrinhAdmin(body)
-    fun updateQuyTrinh(id: String, body: Map<String, String>) = ApiClient.instance.updateQuyTrinhAdmin(id, body)
+    // ===== Hoc Phi =====
+    fun addHocPhi(body: Map<String, String>) = api.addHocPhiAdmin(body)
+    fun updateHocPhi(id: String, body: Map<String, String>) = api.updateHocPhiAdmin(id, body)
+    fun deleteHocPhi(id: String) = api.deleteHocPhiAdmin(id)
 
-    // Hoc Bong
-    fun addHocBong(body: Map<String, String>) = ApiClient.instance.addHocBongAdmin(body)
+    // ===== Quy Trinh =====
+    fun addQuyTrinh(body: Map<String, String>) = api.addQuyTrinhAdmin(body)
+    fun updateQuyTrinh(id: String, body: Map<String, String>) = api.updateQuyTrinhAdmin(id, body)
+    fun deleteQuyTrinh(id: String) = api.deleteQuyTrinhAdmin(id)
 
-    // Chi Tieu
-    fun addChiTieu(body: Map<String, String>) = ApiClient.instance.addChiTieuAdmin(body)
+    // ===== Hoc Bong =====
+    fun addHocBong(body: Map<String, String>) = api.addHocBongAdmin(body)
+    fun updateHocBong(id: String, body: Map<String, String>) = api.updateHocBongAdmin(id, body)
+    fun deleteHocBong(id: String) = api.deleteHocBongAdmin(id)
 
-    // Nghe Nghiep
-    fun addNgheNghiep(body: Map<String, String>) = ApiClient.instance.addNgheNghiepAdmin(body)
+    // ===== Chi Tieu =====
+    fun addChiTieu(body: Map<String, String>) = api.addChiTieuAdmin(body)
+    fun updateChiTieu(id: String, body: Map<String, String>) = api.updateChiTieuAdmin(id, body)
+    fun deleteChiTieu(id: String) = api.deleteChiTieuAdmin(id)
 
-    // Phuong Thuc Xet Tuyen
-    fun addPhuongThuc(body: Map<String, String>) = ApiClient.instance.addPhuongThucAdmin(body)
+    // ===== Nghe Nghiep =====
+    fun addNgheNghiep(body: Map<String, String>) = api.addNgheNghiepAdmin(body)
+    fun updateNgheNghiep(id: String, body: Map<String, String>) = api.updateNgheNghiepAdmin(id, body)
+    fun deleteNgheNghiep(id: String) = api.deleteNgheNghiepAdmin(id)
+
+    // ===== Phuong Thuc Xet Tuyen =====
+    fun getPhuongThuc() = api.getPhuongThucXetTuyen()
+    fun addPhuongThuc(body: Map<String, String>) = api.addPhuongThucAdmin(body)
+    fun updatePhuongThuc(id: String, body: Map<String, String>) = api.updatePhuongThucAdmin(id, body)
+    fun deletePhuongThuc(id: String) = api.deletePhuongThucAdmin(id)
 }
-

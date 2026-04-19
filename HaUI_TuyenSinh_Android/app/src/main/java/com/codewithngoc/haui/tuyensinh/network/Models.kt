@@ -113,6 +113,14 @@ data class NguoiDungResponse(
     val vaiTro: String?
 )
 
+// ===== PHUONG THUC XET TUYEN =====
+data class PhuongThucItem(
+    val id: String?,
+    val tenPhuongThuc: String?,
+    val moTa: String?
+)
+data class PhuongThucListResponse(val status: String, val data: List<PhuongThucItem>)
+
 // ===== ADMIN =====
 data class TaiKhoanAdminItem(val id: String?, val username: String?, val role: String?)
 data class AdminTaiKhoanResponse(val status: String, val data: List<TaiKhoanAdminItem>)

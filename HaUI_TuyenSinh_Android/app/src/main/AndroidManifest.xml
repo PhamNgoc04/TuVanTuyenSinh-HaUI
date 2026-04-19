@@ -32,6 +32,15 @@
         <activity android:name=".ui.info.ThongTinThietYeuActivity" android:exported="false" />
         <activity android:name=".ui.profile.EditProfileActivity" android:exported="false" />
         <activity android:name=".ui.admin.AdminDashboardActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminNganhHocManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminTinTucManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminHocPhiManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminQuyTrinhManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminHocBongManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminChiTieuManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminNgheNghiepManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminPhuongThucManageActivity" android:exported="false" />
+        <activity android:name=".ui.admin.AdminTruongManageActivity" android:exported="false" />
         <activity android:name=".ui.course.NganhHocDetailActivity" android:exported="false" />
         <activity android:name=".ui.chat.AiChatActivity" android:exported="false" />
         <activity android:name=".ui.auth.RegisterActivity" android:exported="false" />

@@ -1,0 +1,39 @@
+﻿To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:dataBindingMergeDependencyArtifactsDebug UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:dataBindingGenBaseClassesDebug UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+
+> Task :app:compileDebugKotlin
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/admin/AdminChiTieuManageActivity.kt:37:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/admin/AdminDashboardActivity.kt:18:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/admin/AdminNgheNghiepManageActivity.kt:32:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/admin/AdminTruongManageActivity.kt:26:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/admin/BaseAdminManageActivity.kt:59:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/auth/LoginActivity.kt:25:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/auth/RegisterActivity.kt:22:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/chat/AiChatActivity.kt:30:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/chat/AiChatActivity.kt:58:17 'fun startActivityForResult(intent: Intent, requestCode: Int): Unit' is deprecated. This method has been deprecated in favor of using the Activity Result API
+      which brings increased type safety via an {@link ActivityResultContract} and the prebuilt
+      contracts for common intents available in
+      {@link androidx.activity.result.contract.ActivityResultContracts}, provides hooks for
+      testing, and allow receiving results in separate, testable classes independent from your
+      activity. Use
+      {@link #registerForActivityResult(ActivityResultContract, ActivityResultCallback)}
+      passing in a {@link StartActivityForResult} object for the {@link ActivityResultContract}.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/course/NganhHocDetailActivity.kt:29:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/info/ThongTinThietYeuActivity.kt:27:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/info/ThongTinTruongActivity.kt:21:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/main/MainActivity.kt:20:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/profile/EditProfileActivity.kt:23:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+
+BUILD SUCCESSFUL in 1m 4s
+9 actionable tasks: 1 executed, 8 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html
