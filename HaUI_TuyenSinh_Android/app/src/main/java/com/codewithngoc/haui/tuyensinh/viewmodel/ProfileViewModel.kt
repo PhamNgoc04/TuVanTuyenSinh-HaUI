@@ -19,30 +19,53 @@ class ProfileViewModel : ViewModel() {
     private val _updateStatus = MutableLiveData<Boolean?>()
     val updateStatus: LiveData<Boolean?> = _updateStatus
 
+    // ✅ Fix #3: Thêm LiveData error để UI hiển thị lỗi
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> = _error
+
+    private val _isLoading = MutableLiveData<Boolean>(false)
+    val isLoading: LiveData<Boolean> = _isLoading
+
     fun loadProfile(accountId: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
             try {
                 val res = repository.getNguoiDung(accountId).awaitResponse()
-                if (res.isSuccessful) {
+                if (res.isSuccessful && res.body() != null) {
                     _userProfile.postValue(res.body())
+                } else {
+                    // ✅ Không im lặng nữa — báo lỗi rõ ràng
+                    _error.postValue("Không thể tải hồ sơ (HTTP ${res.code()})")
+                    _userProfile.postValue(null)
                 }
             } catch (e: Exception) {
-                // Ignore error in demo
+                // ✅ Bắt lỗi mạng và thông báo cho UI
+                _error.postValue("Lỗi kết nối: ${e.localizedMessage ?: "Vui lòng kiểm tra mạng"}")
+                _userProfile.postValue(null)
+            } finally {
+                _isLoading.postValue(false)
             }
         }
     }
 
     fun updateProfile(id: String, name: String, email: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
             try {
                 val res = repository.updateNguoiDung(id, mapOf("ten" to name, "email" to email)).awaitResponse()
                 if (res.isSuccessful && res.body()?.get("status") == "SUCCESS") {
                     _updateStatus.postValue(true)
+                    // Reload profile sau khi update thành công
+                    loadProfile(id)
                 } else {
                     _updateStatus.postValue(false)
+                    _error.postValue("Cập nhật thất bại (HTTP ${res.code()})")
                 }
             } catch (e: Exception) {
                 _updateStatus.postValue(false)
+                _error.postValue("Lỗi kết nối: ${e.localizedMessage}")
+            } finally {
+                _isLoading.postValue(false)
             }
         }
     }
@@ -50,15 +73,18 @@ class ProfileViewModel : ViewModel() {
     fun updateAvatar(id: String, avatarUrl: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                // Backend will update only the fields sent in the map
                 repository.updateNguoiDung(id, mapOf("avatar" to avatarUrl)).awaitResponse()
             } catch (e: Exception) {
-                // Ignore error in demo
+                _error.postValue("Không thể cập nhật ảnh đại diện")
             }
         }
     }
 
     fun resetStatus() {
         _updateStatus.value = null
+    }
+
+    fun clearError() {
+        _error.value = null
     }
 }

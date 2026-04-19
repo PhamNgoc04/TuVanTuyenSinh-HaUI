@@ -66,8 +66,8 @@ class HoSoFragment : Fragment() {
 
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
-        val prefs = requireActivity().getSharedPreferences("haui_prefs", Context.MODE_PRIVATE)
-        accountId = prefs.getString("accountId", "") ?: ""
+        val prefs = requireActivity().getSharedPreferences(AppPrefs.PREF_MAIN, Context.MODE_PRIVATE)
+        accountId = prefs.getString(AppPrefs.KEY_ACCOUNT_ID, "") ?: ""
 
         setupObservers()
 
@@ -75,7 +75,7 @@ class HoSoFragment : Fragment() {
             binding.progressBar.visibility = View.VISIBLE
             viewModel.loadProfile(accountId)
         } else {
-            binding.tvName.text = "Xin chào, ${prefs.getString("username", "User")}"
+            binding.tvName.text = "Xin chào, ${prefs.getString(AppPrefs.KEY_USERNAME, "User")}"
         }
 
         binding.btnThietYeu.setOnClickListener {
@@ -86,10 +86,10 @@ class HoSoFragment : Fragment() {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
         }
 
-        val themePrefs = requireActivity().getSharedPreferences("THEME_PREFS", Context.MODE_PRIVATE)
-        binding.switchDarkMode.isChecked = themePrefs.getBoolean("isDark", false)
+        val themePrefs = requireActivity().getSharedPreferences(AppPrefs.PREF_THEME, Context.MODE_PRIVATE)
+        binding.switchDarkMode.isChecked = themePrefs.getBoolean(AppPrefs.KEY_IS_DARK, false)
         binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
-            themePrefs.edit().putBoolean("isDark", isChecked).apply()
+            themePrefs.edit().putBoolean(AppPrefs.KEY_IS_DARK, isChecked).apply()
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             } else {
@@ -104,10 +104,10 @@ class HoSoFragment : Fragment() {
         }
 
         binding.btnLogout.setOnClickListener {
-            val userPrefs = requireActivity().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
-            prefs.edit().clear().apply()
-            userPrefs.edit().clear().apply()
-            startActivity(Intent(requireContext(), LoginActivity::class.java))
+            // ✅ Fix #10: Clear TẤT CẢ SharedPreferences khi logout
+            requireActivity().getSharedPreferences(AppPrefs.PREF_MAIN, Context.MODE_PRIVATE).edit().clear().apply()
+            requireActivity().getSharedPreferences(AppPrefs.PREF_THEME, Context.MODE_PRIVATE).edit().clear().apply()
+            startActivity(android.content.Intent(requireContext(), com.codewithngoc.haui.tuyensinh.ui.auth.LoginActivity::class.java))
             requireActivity().finish()
         }
     }

@@ -1,16 +1,18 @@
 package com.codewithngoc.haui.tuyensinh.ui.course
 import com.codewithngoc.haui.tuyensinh.*
 
+import android.os.Build
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.codewithngoc.haui.tuyensinh.databinding.ActivityNganhHocDetailBinding
@@ -98,13 +100,18 @@ class NganhDetailTabFragment : Fragment() {
         val llContainer = root.findViewById<LinearLayout>(R.id.llContainer)
         
         val pos = arguments?.getInt("POSITION") ?: 0
-        val viewModel = (requireActivity() as NganhHocDetailActivity).nganhViewModel
+        // ✅ Fix #9: Dùng activityViewModels() delegate thay vì cast Activity
+        val viewModel: NganhViewModel by activityViewModels()
 
         fun addCard(title: String, desc: String, iconRes: Int) {
             val cardView = inflater.inflate(R.layout.item_detail_card, llContainer, false)
             cardView.findViewById<TextView>(R.id.tvTitle).text = title
-            @Suppress("DEPRECATION")
-            cardView.findViewById<TextView>(R.id.tvDescription).text = android.text.Html.fromHtml(desc)
+            // ✅ Fix #8: Html.fromHtml version-safe
+            cardView.findViewById<TextView>(R.id.tvDescription).text =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+                    Html.fromHtml(desc, Html.FROM_HTML_MODE_LEGACY)
+                else
+                    @Suppress("DEPRECATION") Html.fromHtml(desc)
             cardView.findViewById<ImageView>(R.id.ivIcon).setImageResource(iconRes)
             llContainer.addView(cardView)
         }

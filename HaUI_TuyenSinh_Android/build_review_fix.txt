@@ -1,0 +1,21 @@
+﻿To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/9.3.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:dataBindingMergeDependencyArtifactsDebug UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:processDebugNavigationResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:dataBindingGenBaseClassesDebug UP-TO-DATE
+> Task :app:generateDebugRFile UP-TO-DATE
+
+> Task :app:compileDebugKotlin
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/chat/AiChatActivity.kt:48:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/course/NganhHocDetailActivity.kt:33:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+w: file:///D:/Mobile_Kotlin_DevPro/DACK/HaUI_TuyenSinh_Android/app/src/main/java/com/codewithngoc/haui/tuyensinh/ui/main/MainActivity.kt:21:16 'var statusBarColor: Int' is deprecated. Deprecated in Java.
+
+BUILD SUCCESSFUL in 41s
+9 actionable tasks: 1 executed, 8 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.3.1/userguide/configuration_cache_enabling.html
