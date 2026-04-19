@@ -3,10 +3,50 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray_light">#E0E0E0</color>
-    
-    <!-- Màu tông chủ đạo theo thiết kế của bạn -->
-    <color name="haui_red">#D32F2F</color>       <!-- Đỏ Appbar & Outline -->
-    <color name="bot_teal">#00E5FF</color>       <!-- Xanh viền (Robot) -->
+
+    <!-- HaUI Brand Colors -->
+    <color name="haui_red">#C62828</color>
+    <color name="haui_red_dark">#8E0000</color>
+    <color name="haui_red_light">#EF5350</color>
+    <color name="haui_red_accent">#FF8A80</color>
+
+    <!-- UI Backgrounds -->
+    <color name="bg_page">#F7F8FA</color>
+    <color name="bg_card">#FFFFFF</color>
+    <color name="bg_header_gradient_start">#C62828</color>
+    <color name="bg_header_gradient_end">#8E0000</color>
+
+    <!-- Profile Header -->
+    <color name="profile_bg_start">#1A1A2E</color>
+    <color name="profile_bg_mid">#C62828</color>
+    <color name="profile_bg_end">#8E0000</color>
+
+    <!-- Text -->
+    <color name="text_primary">#1C1C2E</color>
+    <color name="text_secondary">#6E7A8A</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_caption">#9BA8B5</color>
+
+    <!-- Buttons -->
+    <color name="btn_edit_start">#C62828</color>
+    <color name="btn_edit_end">#EF5350</color>
+    <color name="btn_orient_start">#4A00E0</color>
+    <color name="btn_orient_end">#8E2DE2</color>
+    <color name="btn_logout_bg">#F4F6F8</color>
+    <color name="btn_logout_text">#6E7A8A</color>
+    <color name="btn_admin_start">#B71C1C</color>
+    <color name="btn_admin_end">#D32F2F</color>
+
+    <!-- Tag / Badge -->
+    <color name="tag_bg">#FFF5F5</color>
+    <color name="tag_text">#C62828</color>
+
+    <!-- News card accent -->
+    <color name="news_accent">#C62828</color>
+    <color name="news_date_text">#9BA8B5</color>
+
+    <!-- Legacy compat -->
+    <color name="bot_teal">#00E5FF</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>

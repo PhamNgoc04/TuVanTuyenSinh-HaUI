@@ -68,7 +68,101 @@ class AdminViewModel : ViewModel() {
             }
         }
     }
-    
+    fun addHocPhi(soTien: String, namHoc: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
+            try {
+                val body = mapOf("soTien" to soTien, "namHoc" to namHoc)
+                val res = repository.addHocPhi(body).awaitResponse()
+                _actionStatus.postValue(res.body())
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", e.message))
+            } finally {
+                _isLoading.postValue(false)
+            }
+        }
+    }
+
+    fun addQuyTrinh(noiDung: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
+            try {
+                val body = mapOf("noiDung" to noiDung)
+                val res = repository.addQuyTrinh(body).awaitResponse()
+                _actionStatus.postValue(res.body())
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", e.message))
+            } finally {
+                _isLoading.postValue(false)
+            }
+        }
+    }
+
+    fun addHocBong(tenHocBong: String, giaTriHocBong: String, dieuKien: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
+            try {
+                val body = mapOf("tenHocBong" to tenHocBong, "giaTriHocBong" to giaTriHocBong, "dieuKien" to dieuKien)
+                val res = repository.addHocBong(body).awaitResponse()
+                _actionStatus.postValue(res.body())
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", e.message))
+            } finally { _isLoading.postValue(false) }
+        }
+    }
+
+    fun addChiTieu(maNganh: String, soChiTieu: String, nam: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
+            try {
+                val body = mapOf("maNganh" to maNganh, "soChiTieu" to soChiTieu, "nam" to nam)
+                val res = repository.addChiTieu(body).awaitResponse()
+                _actionStatus.postValue(res.body())
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", e.message))
+            } finally { _isLoading.postValue(false) }
+        }
+    }
+
+    fun addNgheNghiep(maNganh: String, tenNgheNghiep: String, moTa: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
+            try {
+                val body = mapOf("maNganh" to maNganh, "tenNgheNghiep" to tenNgheNghiep, "moTa" to moTa)
+                val res = repository.addNgheNghiep(body).awaitResponse()
+                _actionStatus.postValue(res.body())
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", e.message))
+            } finally { _isLoading.postValue(false) }
+        }
+    }
+
+    fun addPhuongThuc(tenPhuongThuc: String, moTa: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
+            try {
+                val body = mapOf("tenPhuongThuc" to tenPhuongThuc, "moTa" to moTa)
+                val res = repository.addPhuongThuc(body).awaitResponse()
+                _actionStatus.postValue(res.body())
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", e.message))
+            } finally { _isLoading.postValue(false) }
+        }
+    }
+
+    fun updateTruong(maTruong: String, tenTruong: String, diaChi: String, gioiThieu: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            _isLoading.postValue(true)
+            try {
+                val body = mapOf("tenTruong" to tenTruong, "diaChi" to diaChi, "gioiThieu" to gioiThieu)
+                val res = repository.updateTruong(maTruong, body).awaitResponse()
+                _actionStatus.postValue(res.body())
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", e.message))
+            } finally { _isLoading.postValue(false) }
+        }
+    }
+
     fun resetActionStatus() {
         _actionStatus.value = null
     }

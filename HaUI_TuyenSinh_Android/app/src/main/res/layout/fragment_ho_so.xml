@@ -1,106 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/bg_page">
 
-    <ImageView
-        android:id="@+id/imgAvatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:src="@android:drawable/ic_menu_myplaces"
+    <!-- ─── PROFILE HEADER ─── -->
+    <FrameLayout
+        android:id="@+id/headerFrame"
+        android:layout_width="0dp"
+        android:layout_height="260dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tên của bạn"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/imgAvatar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Gradient bg -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_profile_header" />
 
-    <TextView
-        android:id="@+id/tvRole"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Vai trò: USER"
-        android:textSize="14sp"
-        android:textColor="@color/gray_light"
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@id/tvName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <!-- Decorative circle top-right -->
+        <View
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="-50dp"
+            android:layout_marginEnd="-50dp"
+            android:background="@color/bg_card"
+            android:alpha="0.06" />
 
-    <Button
-        android:id="@+id/btnEditProfile"
+        <!-- Decorative circle bottom-left -->
+        <View
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="start|bottom"
+            android:layout_marginStart="-30dp"
+            android:layout_marginBottom="-30dp"
+            android:background="@color/bg_card"
+            android:alpha="0.06" />
+
+        <!-- Profile info centered -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingTop="20dp"
+            android:paddingBottom="28dp">
+
+            <!-- Avatar circle -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                app:cardCornerRadius="44dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="2dp"
+                app:strokeColor="@color/bg_card"
+                app:cardBackgroundColor="#4DFFFFFF"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:id="@+id/imgAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@android:drawable/ic_menu_myplaces"
+                    app:tint="@color/bg_card"
+                    android:scaleType="centerInside"
+                    android:padding="16dp" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Name -->
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên của bạn"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="12dp" />
+
+            <!-- Role badge -->
+            <TextView
+                android:id="@+id/tvRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🎓  Sinh viên"
+                android:textSize="13sp"
+                android:textColor="#EEFFFFFF"
+                android:background="#28FFFFFF"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:layout_marginTop="8dp" />
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email@student.haui.edu.vn"
+                android:textSize="12sp"
+                android:textColor="#99FFFFFF"
+                android:layout_marginTop="5dp" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- ─── SCROLLABLE BODY ─── -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollBody"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Chỉnh sửa hồ sơ"
-        android:backgroundTint="@color/teal_700"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintTop_toBottomOf="@id/tvRole"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerFrame"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/btnThietYeu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Thông tin định hướng"
-        android:backgroundTint="@color/purple_500"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintTop_toBottomOf="@id/btnEditProfile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="24dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="40dp">
 
-    <Button
-        android:id="@+id/btnAdmin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="BẢNG ĐIỀU KHIỂN ADMIN"
-        android:backgroundTint="#B71C1C"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/btnThietYeu"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Section label -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tài khoản"
+                android:textSize="11sp"
+                android:textColor="@color/text_caption"
+                android:textAllCaps="true"
+                android:letterSpacing="0.12"
+                android:layout_marginBottom="14dp" />
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Đăng xuất"
-        android:backgroundTint="@color/gray_light"
-        android:textColor="@color/black"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintTop_toBottomOf="@id/btnAdmin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <!-- Edit Profile -->
+            <Button
+                android:id="@+id/btnEditProfile"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="✏️  Chỉnh sửa hồ sơ"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_edit_profile"
+                app:backgroundTint="@null"
+                android:stateListAnimator="@null"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp" />
 
+            <!-- Orientation -->
+            <Button
+                android:id="@+id/btnThietYeu"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="🎯  Thông tin định hướng"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:background="@drawable/btn_orient"
+                app:backgroundTint="@null"
+                android:stateListAnimator="@null"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:layout_marginTop="12dp" />
+
+            <!-- Dark Mode Switch -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/bg_card"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#1A000000">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🌙  Giao diện tối"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchDarkMode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Admin (hidden) -->
+            <Button
+                android:id="@+id/btnAdmin"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="⚙️  Bảng điều khiển Admin"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="#B71C1C"
+                android:stateListAnimator="@null"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:layout_marginTop="12dp"
+                android:visibility="gone" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F2F5"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp" />
+
+            <!-- Logout -->
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:text="🚪  Đăng xuất"
+                android:textSize="15sp"
+                android:textColor="@color/haui_red"
+                android:background="@drawable/btn_logout"
+                app:backgroundTint="@null"
+                android:stateListAnimator="@null"
+                android:elevation="0dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Progress bar overlay -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:indeterminateTint="@color/haui_red"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

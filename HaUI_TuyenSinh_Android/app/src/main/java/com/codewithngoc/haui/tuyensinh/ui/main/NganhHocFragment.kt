@@ -53,12 +53,14 @@ class NganhHocFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val query = s.toString().lowercase().trim()
+                val queryNoAccent = removeAccents(query)
                 filteredList.clear()
-                if (query.isEmpty()) {
+                if (queryNoAccent.isEmpty()) {
                     filteredList.addAll(nganhList)
                 } else {
                     filteredList.addAll(nganhList.filter { 
-                        (it.tenNganh ?: "").lowercase().contains(query) 
+                        val nameNoAccent = removeAccents((it.tenNganh ?: "").lowercase())
+                        nameNoAccent.contains(queryNoAccent) 
                     })
                 }
                 adapter.notifyDataSetChanged()
@@ -82,6 +84,12 @@ class NganhHocFragment : Fragment() {
                 Toast.makeText(context, "Lỗi tải ngành học", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun removeAccents(str: String): String {
+        val normalized = java.text.Normalizer.normalize(str, java.text.Normalizer.Form.NFD)
+        return normalized.replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
+            .replace('đ', 'd').replace('Đ', 'D')
     }
 
     override fun onDestroyView() {

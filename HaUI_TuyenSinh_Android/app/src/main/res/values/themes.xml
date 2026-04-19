@@ -1,9 +1,19 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.TuVanTuyenSinhHaUI" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/haui_red</item>
+        <item name="colorPrimaryVariant">@color/haui_red_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
     </style>
 
     <style name="Theme.TuVanTuyenSinhHaUI" parent="Base.Theme.TuVanTuyenSinhHaUI" />
+
+    <!-- Splash Screen Theme (dùng cho LoginActivity khi khởi động) -->
+    <style name="Theme.TuVanTuyenSinhHaUI.Splash" parent="Theme.TuVanTuyenSinhHaUI">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:statusBarColor">@color/haui_red_dark</item>
+        <item name="android:navigationBarColor">@color/haui_red_dark</item>
+    </style>
 </resources>

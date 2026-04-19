@@ -24,6 +24,38 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AiChatActivity::class.java))
         }
 
+        var dX = 0f
+        var dY = 0f
+        var isMoved = false
+
+        binding.fabAiChatbot.setOnTouchListener { view, event ->
+            when (event.actionMasked) {
+                android.view.MotionEvent.ACTION_DOWN -> {
+                    dX = view.x - event.rawX
+                    dY = view.y - event.rawY
+                    isMoved = false
+                    true
+                }
+                android.view.MotionEvent.ACTION_MOVE -> {
+                    val newX = event.rawX + dX
+                    val newY = event.rawY + dY
+                    if (kotlin.math.abs(view.x - newX) > 10 || kotlin.math.abs(view.y - newY) > 10) {
+                        isMoved = true
+                    }
+                    view.y = newY
+                    view.x = newX
+                    true
+                }
+                android.view.MotionEvent.ACTION_UP -> {
+                    if (!isMoved) {
+                        view.performClick()
+                    }
+                    true
+                }
+                else -> false
+            }
+        }
+
         // Setup BottomNavigation
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {

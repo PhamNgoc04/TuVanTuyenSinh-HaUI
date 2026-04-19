@@ -1,44 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     android:id="@+id/rootLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@color/bg_page">
 
+    <!-- AppBar with collapsing toolbar -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:elevation="4dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/haui_red"
-            app:title="Chi tiết ngành học"
+            android:background="@drawable/bg_header_gradient"
             app:titleTextColor="@color/white"
-            app:navigationIcon="@android:drawable/ic_menu_revert" />
+            app:subtitleTextColor="#CCFFFFFF"
+            app:navigationIcon="@android:drawable/ic_menu_revert"
+            app:navigationIconTint="@color/white" />
 
+        <!-- Tab layout -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:background="@color/haui_red_dark"
             app:tabMode="scrollable"
-            app:tabTextColor="@color/white"
-            app:tabSelectedTextColor="@color/white"
-            app:tabIndicatorColor="@color/white"
-            android:background="@color/haui_red" />
+            app:tabTextColor="#99FFFFFF"
+            app:tabSelectedTextColor="@color/bg_card"
+            app:tabIndicatorColor="@color/bg_card"
+            app:tabIndicatorHeight="3dp"
+            app:tabTextAppearance="@android:style/TextAppearance.Small"
+            app:tabPaddingStart="4dp"
+            app:tabPaddingEnd="4dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <!-- ViewPager -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/appBarLayout"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

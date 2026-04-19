@@ -38,6 +38,10 @@ class HomeFragment : Fragment() {
         adapter = TinTucAdapter(emptyList())
         binding.rvTinTuc.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTinTuc.adapter = adapter
+        binding.rvTinTuc.isNestedScrollingEnabled = false
+        binding.tvXemTatCa.setOnClickListener {
+            requireActivity().findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.nav_news
+        }
 
         setupObservers()
     }
@@ -49,8 +53,7 @@ class HomeFragment : Fragment() {
 
         viewModel.truongInfo.observe(viewLifecycleOwner) { truong ->
             if (truong != null) {
-                binding.tvWelcome.text = truong.tenTruong
-                binding.tvAddress.text = "Địa chỉ: ${truong.duong}, ${truong.quan}, ${truong.thanhPho}"
+                binding.tvAddress.text = "${truong.duong}, ${truong.quan}, ${truong.thanhPho}"
             }
         }
 
@@ -86,6 +89,15 @@ class HomeFragment : Fragment() {
             val item = items[position]
             holder.binding.tvTieuDe.text = item.tieuDe
             holder.binding.tvMoTa.text = item.moTa
+
+            holder.itemView.setOnClickListener {
+                val intent = android.content.Intent(holder.itemView.context, TinTucDetailActivity::class.java).apply {
+                    putExtra("TIEU_DE", item.tieuDe)
+                    putExtra("MO_TA", item.moTa)
+                    putExtra("NOI_DUNG", item.noiDung)
+                }
+                holder.itemView.context.startActivity(intent)
+            }
         }
 
         override fun getItemCount() = items.size

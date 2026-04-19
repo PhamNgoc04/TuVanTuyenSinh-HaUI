@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Crimson-to-dark-red gradient background -->
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:startColor="#C62828"
+                android:endColor="#8E0000"
+                android:angle="135"
+                android:type="linear" />
+        </shape>
+    </item>
+
+    <!-- HaUI shield logo (foreground vector) centered -->
+    <item
+        android:width="140dp"
+        android:height="140dp"
+        android:gravity="center"
+        android:drawable="@drawable/ic_launcher_foreground" />
+</layer-list>

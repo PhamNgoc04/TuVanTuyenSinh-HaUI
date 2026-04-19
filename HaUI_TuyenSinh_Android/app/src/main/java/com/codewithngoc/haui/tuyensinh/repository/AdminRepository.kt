@@ -25,4 +25,17 @@ class AdminRepository {
     // Quy Trinh
     fun addQuyTrinh(body: Map<String, String>) = ApiClient.instance.addQuyTrinhAdmin(body)
     fun updateQuyTrinh(id: String, body: Map<String, String>) = ApiClient.instance.updateQuyTrinhAdmin(id, body)
+
+    // Hoc Bong
+    fun addHocBong(body: Map<String, String>) = ApiClient.instance.addHocBongAdmin(body)
+
+    // Chi Tieu
+    fun addChiTieu(body: Map<String, String>) = ApiClient.instance.addChiTieuAdmin(body)
+
+    // Nghe Nghiep
+    fun addNgheNghiep(body: Map<String, String>) = ApiClient.instance.addNgheNghiepAdmin(body)
+
+    // Phuong Thuc Xet Tuyen
+    fun addPhuongThuc(body: Map<String, String>) = ApiClient.instance.addPhuongThucAdmin(body)
 }
+

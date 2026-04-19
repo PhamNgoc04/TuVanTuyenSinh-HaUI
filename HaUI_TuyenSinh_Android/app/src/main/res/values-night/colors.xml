@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- HaUI Brand Colors (Keep identical for brand consistency) -->
+    <color name="haui_red">#C62828</color>
+    <color name="haui_red_dark">#8E0000</color>
+    <color name="haui_red_light">#EF5350</color>
+    <color name="haui_red_accent">#FF8A80</color>
+
+    <!-- UI Backgrounds (Dark Mode Overrides) -->
+    <color name="bg_page">#121212</color>
+    <color name="bg_card">#1E1E1E</color>
+    
+    <!-- Profile Background Variants -->
+    <color name="profile_bg_start">#121212</color>
+    <color name="profile_bg_mid">#8E0000</color>
+    <color name="profile_bg_end">#3E0000</color>
+
+    <!-- Text (Dark Mode Overrides) -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B0BEC5</color>
+    <color name="text_on_primary">#FFFFFF</color>
+    <color name="text_caption">#9BA8B5</color>
+
+    <!-- General Overrides -->
+    <color name="tag_bg">#2C2C2C</color>
+    <color name="tag_text">#FF8A80</color>
+    <color name="news_accent">#EF5350</color>
+
+    <!-- Buttons -->
+    <color name="btn_logout_bg">#2C2C2C</color>
+    <color name="btn_logout_text">#B0BEC5</color>
+</resources>

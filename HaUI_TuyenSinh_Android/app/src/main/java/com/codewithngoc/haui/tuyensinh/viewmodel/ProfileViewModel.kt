@@ -47,6 +47,17 @@ class ProfileViewModel : ViewModel() {
         }
     }
 
+    fun updateAvatar(id: String, avatarUrl: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                // Backend will update only the fields sent in the map
+                repository.updateNguoiDung(id, mapOf("avatar" to avatarUrl)).awaitResponse()
+            } catch (e: Exception) {
+                // Ignore error in demo
+            }
+        }
+    }
+
     fun resetStatus() {
         _updateStatus.value = null
     }

@@ -16,6 +16,12 @@ import com.codewithngoc.haui.tuyensinh.ui.info.ThongTinThietYeuActivity
 import com.codewithngoc.haui.tuyensinh.ui.profile.EditProfileActivity
 import com.codewithngoc.haui.tuyensinh.ui.admin.AdminDashboardActivity
 import com.codewithngoc.haui.tuyensinh.viewmodel.ProfileViewModel
+import androidx.activity.result.contract.ActivityResultContracts
+import android.net.Uri
+import java.io.File
+import java.io.FileOutputStream
+import java.io.InputStream
+import androidx.appcompat.app.AppCompatDelegate
 
 class HoSoFragment : Fragment() {
 
@@ -23,6 +29,29 @@ class HoSoFragment : Fragment() {
     private val binding get() = _binding!!
     private var accountId = ""
     private lateinit var viewModel: ProfileViewModel
+
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        if (uri != null) {
+            try {
+                val inputStream: InputStream? = requireContext().contentResolver.openInputStream(uri)
+                val file = File(requireContext().filesDir, "avatar_${accountId}.jpg")
+                val outputStream = FileOutputStream(file)
+                if (inputStream != null) {
+                    inputStream.copyTo(outputStream)
+                    inputStream.close()
+                }
+                outputStream.close()
+                
+                binding.imgAvatar.imageTintList = null
+                binding.imgAvatar.setImageURI(null) // Clear cache effectively
+                binding.imgAvatar.setImageURI(Uri.fromFile(file))
+                
+                viewModel.updateAvatar(accountId, "file://${file.absolutePath}")
+            } catch (e: Exception) {
+                Toast.makeText(context, "Lỗi tải ảnh", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +86,23 @@ class HoSoFragment : Fragment() {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
         }
 
+        val themePrefs = requireActivity().getSharedPreferences("THEME_PREFS", Context.MODE_PRIVATE)
+        binding.switchDarkMode.isChecked = themePrefs.getBoolean("isDark", false)
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
+            themePrefs.edit().putBoolean("isDark", isChecked).apply()
+            if (isChecked) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+            }
+        }
+
+        binding.imgAvatar.setOnClickListener {
+            if (accountId.isNotEmpty()) {
+                pickMedia.launch("image/*")
+            }
+        }
+
         binding.btnLogout.setOnClickListener {
             val userPrefs = requireActivity().getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
             prefs.edit().clear().apply()
@@ -70,10 +116,26 @@ class HoSoFragment : Fragment() {
         viewModel.userProfile.observe(viewLifecycleOwner) { user ->
             binding.progressBar.visibility = View.GONE
             if (user != null) {
-                binding.tvName.text = user.ten ?: "Báo danh thành công"
-                binding.tvRole.text = "Vai trò: ${user.vaiTro ?: "USER"}\nEmail: ${user.email ?: "Chưa có"}"
-                
-                if (user.vaiTro == "ADMIN") {
+                binding.tvName.text = user.ten ?: "Sinh viên HaUI"
+                val vaiTroUpper = user.vaiTro?.uppercase()?.trim()
+                val roleLabel = when (vaiTroUpper) {
+                    "ADMIN", "QUẢN TRỊ HỆ THỐNG", "QUẢN TRỊ VIÊN" -> "⚙️  Quản trị viên"
+                    "SINH_VIEN", "SINH VIÊN" -> "🎓  Sinh viên"
+                    else -> "👤  ${user.vaiTro ?: "Người dùng"}"
+                }
+                binding.tvRole.text = roleLabel
+                binding.tvEmail.text = user.email ?: "email@student.haui.edu.vn"
+
+                if (user.avatar?.startsWith("file://") == true) {
+                    binding.imgAvatar.imageTintList = null
+                    binding.imgAvatar.setImageURI(null)
+                    binding.imgAvatar.setImageURI(Uri.parse(user.avatar))
+                } else {
+                    binding.imgAvatar.setImageResource(android.R.drawable.ic_menu_myplaces)
+                    binding.imgAvatar.imageTintList = android.content.res.ColorStateList.valueOf(android.graphics.Color.WHITE)
+                }
+
+                if (vaiTroUpper == "ADMIN" || vaiTroUpper == "QUẢN TRỊ HỆ THỐNG" || vaiTroUpper == "QUẢN TRỊ VIÊN") {
                     binding.btnAdmin.visibility = View.VISIBLE
                     binding.btnAdmin.setOnClickListener {
                         startActivity(Intent(requireContext(), AdminDashboardActivity::class.java))

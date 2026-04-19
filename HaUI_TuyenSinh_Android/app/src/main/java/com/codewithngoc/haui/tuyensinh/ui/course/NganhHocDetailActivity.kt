@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -62,6 +64,7 @@ class NganhHocDetailActivity : AppCompatActivity() {
         nganhViewModel.nganhDetail.observe(this) { detail ->
             if (detail != null) {
                 binding.toolbar.title = detail.tenNganh
+                binding.toolbar.subtitle = "Đại học Công nghiệp Hà Nội"
             }
         }
     }
@@ -91,36 +94,69 @@ class NganhDetailTabFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = TextView(requireContext())
-        view.setPadding(32, 32, 32, 32)
-        view.textSize = 16f
-        view.text = "Loading..."
+        val root = inflater.inflate(R.layout.fragment_nganh_detail_tab, container, false)
+        val llContainer = root.findViewById<LinearLayout>(R.id.llContainer)
         
         val pos = arguments?.getInt("POSITION") ?: 0
         val viewModel = (requireActivity() as NganhHocDetailActivity).nganhViewModel
 
+        fun addCard(title: String, desc: String, iconRes: Int) {
+            val cardView = inflater.inflate(R.layout.item_detail_card, llContainer, false)
+            cardView.findViewById<TextView>(R.id.tvTitle).text = title
+            @Suppress("DEPRECATION")
+            cardView.findViewById<TextView>(R.id.tvDescription).text = android.text.Html.fromHtml(desc)
+            cardView.findViewById<ImageView>(R.id.ivIcon).setImageResource(iconRes)
+            llContainer.addView(cardView)
+        }
+
+        fun showEmpty() {
+            val tv = TextView(requireContext())
+            tv.text = "Đang cập nhật dữ liệu mới nhất..."
+            tv.textSize = 14f
+            tv.setTextColor(androidx.core.content.ContextCompat.getColor(requireContext(), R.color.text_secondary))
+            tv.setPadding(32, 64, 32, 32)
+            tv.textAlignment = View.TEXT_ALIGNMENT_CENTER
+            llContainer.addView(tv)
+        }
+
         when(pos) {
             0 -> viewModel.nganhDetail.observe(viewLifecycleOwner) { detail ->
-                 if (detail == null) view.text = "Trống"
-                 else view.text = "Tên ngành: ${detail.tenNganh}\nCơ sở: ${detail.coSo}\nMô tả: ${detail.moTa}"
+                 llContainer.removeAllViews()
+                 if (detail == null) showEmpty()
+                 else {
+                     addCard("Mô tả ngành học", detail.moTa ?: "Trống", android.R.drawable.ic_menu_info_details)
+                     addCard("Cơ sở đào tạo", detail.coSo ?: "Chưa cập nhật", android.R.drawable.ic_menu_mapmode)
+                 }
             }
             1 -> viewModel.ngheNghiepList.observe(viewLifecycleOwner) { list ->
-                 if (list.isNullOrEmpty()) view.text = "Chưa cập nhật"
-                 else view.text = list.joinToString("\n\n") { "• Tên nghề: ${it.tenNghe}\n  Mức lương: ${it.mucLuong}\n  Tình trạng: ${it.tinhTrang}" }
+                 llContainer.removeAllViews()
+                 if (list.isNullOrEmpty()) showEmpty()
+                 else list.forEach { 
+                     addCard(it.tenNghe ?: "Nghề nghiệp", "<b>Mức lương:</b> ${it.mucLuong}<br><b>Tình trạng:</b> ${it.tinhTrang}", android.R.drawable.ic_menu_myplaces)
+                 }
             }
             2 -> viewModel.chiTieuList.observe(viewLifecycleOwner) { list ->
-                 if (list.isNullOrEmpty()) view.text = "Chưa cập nhật"
-                 else view.text = list.joinToString("\n\n") { "• Năm: ${it.nam}\n  Số lượng: ${it.soLuong}\n  Phương thức: ${it.phuongThuc}" }
+                 llContainer.removeAllViews()
+                 if (list.isNullOrEmpty()) showEmpty()
+                 else list.forEach { 
+                     addCard("Năm tuyển sinh: ${it.nam}", "<b>Chỉ tiêu:</b> ${it.soLuong} sinh viên<br><b>Cách thức:</b> ${it.phuongThuc}", android.R.drawable.ic_menu_sort_by_size)
+                 }
             }
             3 -> viewModel.yeuCauList.observe(viewLifecycleOwner) { list ->
-                 if (list.isNullOrEmpty()) view.text = "Chưa cập nhật"
-                 else view.text = list.joinToString("\n\n") { "• Khối: ${it.khoi}\n  Điểm tổng: ${it.diemTong}" }
+                 llContainer.removeAllViews()
+                 if (list.isNullOrEmpty()) showEmpty()
+                 else list.forEach { 
+                     addCard("Khối xét tuyển: ${it.khoi}", "<b>Điểm chuẩn:</b> <font color='#B71C1C'>${it.diemTong}</font> điểm", android.R.drawable.ic_menu_edit)
+                 }
             }
             4 -> viewModel.tinChiList.observe(viewLifecycleOwner) { list ->
-                 if (list.isNullOrEmpty()) view.text = "Chưa cập nhật"
-                 else view.text = list.joinToString("\n\n") { "• Tín chỉ: ${it.id}\n  Giá tiền: ${it.giaTien}" }
+                 llContainer.removeAllViews()
+                 if (list.isNullOrEmpty()) showEmpty()
+                 else list.forEach { 
+                     addCard("Tín chỉ (Đại học chính quy)", "<b>Học phí:</b> ${it.giaTien}", android.R.drawable.ic_menu_manage)
+                 }
             }
         }
-        return view
+        return root
     }
 }

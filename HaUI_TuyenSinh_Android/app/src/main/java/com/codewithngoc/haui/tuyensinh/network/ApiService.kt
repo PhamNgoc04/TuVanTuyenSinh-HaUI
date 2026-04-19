@@ -97,7 +97,25 @@ interface ApiService {
 
     @PUT("/api/v1/admin/quy-trinh/{id}")
     fun updateQuyTrinhAdmin(@Path("id") id: String, @Body body: Map<String, String>): Call<GenericResponse>
+
+    // ===== ADMIN: HOC BONG =====
+    @POST("/api/v1/admin/hoc-bong")
+    fun addHocBongAdmin(@Body body: Map<String, String>): Call<GenericResponse>
+
+    // ===== ADMIN: CHI TIEU =====
+    @POST("/api/v1/admin/chi-tieu")
+    fun addChiTieuAdmin(@Body body: Map<String, String>): Call<GenericResponse>
+
+    // ===== ADMIN: NGHE NGHIEP =====
+    @POST("/api/v1/admin/nghe-nghiep")
+    fun addNgheNghiepAdmin(@Body body: Map<String, String>): Call<GenericResponse>
+
+    // ===== ADMIN: PHUONG THUC XET TUYEN =====
+    @POST("/api/v1/admin/phuong-thuc-xet-tuyen")
+    fun addPhuongThucAdmin(@Body body: Map<String, String>): Call<GenericResponse>
+
 }
+
 
 interface AiApiService {
     @POST("/api/v1/ai/ask")
