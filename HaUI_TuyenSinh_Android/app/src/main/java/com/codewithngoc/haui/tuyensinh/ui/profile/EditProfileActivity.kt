@@ -3,6 +3,7 @@ import com.codewithngoc.haui.tuyensinh.*
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -25,20 +26,27 @@ class EditProfileActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
 
-        val sharedPref = getSharedPreferences("USER_PREF", Context.MODE_PRIVATE)
-        val actId = sharedPref.getString("ACCOUNT_ID", "")
+        // ✅ Đọc đúng pref name và key mà LoginActivity đã lưu
+        val prefs = getSharedPreferences("haui_prefs", Context.MODE_PRIVATE)
+        val accountId = prefs.getString("accountId", "") ?: ""
 
         setupObservers()
 
-        if (!actId.isNullOrEmpty()) {
-            viewModel.loadProfile(actId)
+        if (accountId.isNotEmpty()) {
+            // Hiển thị loading, khóa form trong lúc chờ data
+            setFormEnabled(false)
+            binding.btnSave.text = "ĐANG TẢI..."
+            viewModel.loadProfile(accountId)
+        } else {
+            Toast.makeText(this, "Không tìm thấy tài khoản, vui lòng đăng nhập lại", Toast.LENGTH_SHORT).show()
+            finish()
         }
 
         binding.btnSave.setOnClickListener {
             val hoTen = binding.etName.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
             if (hoTen.isNotEmpty() && email.isNotEmpty()) {
-                binding.btnSave.isEnabled = false
+                setFormEnabled(false)
                 binding.btnSave.text = "ĐANG LƯU..."
                 viewModel.updateProfile(profileId, hoTen, email)
             } else {
@@ -47,24 +55,38 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
+    private fun setFormEnabled(enabled: Boolean) {
+        binding.etName.isEnabled = enabled
+        binding.etEmail.isEnabled = enabled
+        binding.btnSave.isEnabled = enabled
+    }
+
     private fun setupObservers() {
-        viewModel.userProfile.observe(this) { p ->
-            if (p != null) {
-                profileId = p.id ?: ""
-                binding.etName.setText(p.ten ?: "")
-                binding.etEmail.setText(p.email ?: "")
+        // ✅ Đổ sẵn dữ liệu hiện tại vào form khi load xong
+        viewModel.userProfile.observe(this) { user ->
+            if (user != null) {
+                profileId = user.id ?: ""
+                binding.etName.setText(user.ten ?: "")
+                binding.etEmail.setText(user.email ?: "")
+                // Mở khóa form cho phép chỉnh sửa
+                setFormEnabled(true)
+                binding.btnSave.text = "LƯU THÔNG TIN"
+            } else {
+                Toast.makeText(this, "Không thể tải thông tin hồ sơ", Toast.LENGTH_SHORT).show()
+                setFormEnabled(true)
+                binding.btnSave.text = "LƯU THÔNG TIN"
             }
         }
 
         viewModel.updateStatus.observe(this) { success ->
             if (success != null) {
-                binding.btnSave.isEnabled = true
+                setFormEnabled(true)
                 binding.btnSave.text = "LƯU THÔNG TIN"
                 if (success) {
-                    Toast.makeText(this, "Cập nhật thành công!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "✅ Cập nhật thành công!", Toast.LENGTH_SHORT).show()
                     finish()
                 } else {
-                    Toast.makeText(this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "❌ Cập nhật thất bại, thử lại", Toast.LENGTH_SHORT).show()
                 }
                 viewModel.resetStatus()
             }
