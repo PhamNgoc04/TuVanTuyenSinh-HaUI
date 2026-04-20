@@ -1102,6 +1102,38 @@ prefs.edit().putString(AppPrefs.KEY_TOKEN, value).apply()
 prefs.edit().clear().apply()
 ```
 
+### 14.7 Offline-First Data Cache (SharedPreferences + Gson)
+
+Ứng dụng chuyên nghiệp cần giữ lại dữ liệu cũ khi mất mạng thay vì hiển thị màn hình trắng lỗi.
+
+```kotlin
+// 1. Lưu Cache (LocalCache.kt)
+fun saveTinTuc(context: Context, list: List<TinTucItem>) {
+    val json = Gson().toJson(list)
+    context.getSharedPreferences("haui_cache_v1", Context.MODE_PRIVATE)
+        .edit().putString("cache_tintuc", json).apply()
+}
+
+// 2. Load Cache trong ViewModel NGAY LẬP TỨC 
+fun loadData() {
+    val context = HaUIApplication.appContext
+    LocalCache.getTinTuc(context)?.let { _tinTucList.postValue(it) }
+
+    viewModelScope.launch(Dispatchers.IO) { ... } // Gọi API background
+}
+```
+
+### 14.8 UX Navigation — Không dùng Tab giả
+
+> ❌ **Sai lầm UX phổ biến:** Bấm "Xem tất cả" tin tức → navigate người dùng sang một tab khác (Ngành Học — nav_news) làm gãy user flow.
+
+```kotlin
+// ✅ Chuẩn UX: Mở một Activity mới riêng biệt chứa toàn bộ list
+binding.tvXemTatCa.setOnClickListener {
+    startActivity(Intent(requireContext(), TinTucListActivity::class.java))
+}
+```
+
 ---
 
 ## 15. Git Workflow & Branching

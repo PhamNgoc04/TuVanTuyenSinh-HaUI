@@ -18,6 +18,7 @@
 | M5 | Main UI | 3 Fragment + BottomNav |
 | M6 | Feature UI | Chat AI + Profile + Detail |
 | M7 | Admin CRUD | Full quản trị 9 màn hình |
+| M8 | Offline Cache & UX | App chạy tốc độ cao kể cả khi offline |
 
 ---
 
@@ -1553,7 +1554,89 @@ class AdminNganhHocManageActivity : BaseAdminManageActivity<NganhHocItem>() {
 </LinearLayout>
 ```
 
-### Bước 8.5 — Final Build & Git
+## MILESTONE 8 — OFFLINE-FIRST CACHE & UX BUGS
+
+### Bước 8.1 — `data/LocalCache.kt`
+
+```kotlin
+package com.codewithngoc.haui.tuyensinh.data
+
+import android.content.Context
+import com.codewithngoc.haui.tuyensinh.network.TinTucItem
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
+object LocalCache {
+    private const val PREF = "haui_cache_v1"
+    private val gson = Gson()
+
+    fun saveTinTuc(ctx: Context, list: List<TinTucItem>) {
+        ctx.getSharedPreferences(PREF, 0).edit().putString("news", gson.toJson(list)).apply()
+    }
+    fun getTinTuc(ctx: Context): List<TinTucItem>? {
+        val json = ctx.getSharedPreferences(PREF, 0).getString("news", null) ?: return null
+        return try { gson.fromJson(json, object: TypeToken<List<TinTucItem>>(){}.type) } catch(e: Exception) { null }
+    }
+}
+```
+
+### Bước 8.2 — Tích hợp vào ViewModels
+
+Trong `HomeViewModel.kt`:
+```kotlin
+fun loadData() {
+    val ctx = HaUIApplication.appContext
+    // 1. Tức tốc load cache lên UI
+    LocalCache.getTinTuc(ctx)?.let { _tinTucList.postValue(it) }
+
+    // 2. Chạy network ngầm
+    viewModelScope.launch(Dispatchers.IO) {
+        try {
+            val res = api.getTinTuc().awaitResponse()
+            val newData = res.body()?.data ?: emptyList()
+            _tinTucList.postValue(newData)
+            // 3. Cập nhật Cache mới
+            LocalCache.saveTinTuc(ctx, newData)
+        } catch (e: Exception) {
+            _error.postValue("Đang xem chế độ offline (Mất kết nối)")
+        }
+    }
+}
+```
+
+### Bước 8.3 — Sửa lỗi UX BottomNav (`MainActivity.kt`)
+
+Dùng Show/Hide Framework thay vì tạo mới Fragment:
+```kotlin
+private var activeFragment: Fragment = homeFragment
+
+private fun setupBottomNavigation() {
+    supportFragmentManager.beginTransaction().apply {
+        add(R.id.fragmentContainer, hoSoFragment).hide(hoSoFragment)
+        add(R.id.fragmentContainer, nganhHocFragment).hide(nganhHocFragment)
+        add(R.id.fragmentContainer, homeFragment)
+    }.commit()
+
+    binding.bottomNavigation.setOnItemSelectedListener { item ->
+        val target = when(item.itemId) {
+            R.id.nav_home -> homeFragment
+            R.id.nav_news -> nganhHocFragment
+            else -> hoSoFragment
+        }
+        supportFragmentManager.beginTransaction().hide(activeFragment).show(target).commit()
+        activeFragment = target
+        true
+    }
+}
+```
+
+> ✅ **Checkpoint M8:** App load cực nhanh, không bắt buộc có mạng vẫn mượt, đổi tab không bị giật lag.
+
+---
+
+## MILESTONE 9 — FINAL BUILD
+
+### Bước 9.1 — Final Build & Git
 
 ```bash
 # Build kiểm tra
@@ -1609,6 +1692,8 @@ app/src/main/java/.../
     ├── main/TinTucAdapter.kt           ← M5
     ├── main/NganhAdapter.kt            ← M5
     ├── main/TinTucDetailActivity.kt    ← M5
+    ├── main/TinTucListActivity.kt      ← M8
+    ├── data/LocalCache.kt              ← M8
     ├── course/NganhHocDetailActivity.kt ← M6
     ├── chat/AiChatActivity.kt          ← M6
     ├── profile/EditProfileActivity.kt  ← M6
