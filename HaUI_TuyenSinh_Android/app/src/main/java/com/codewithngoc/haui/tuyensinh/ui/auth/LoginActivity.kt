@@ -26,8 +26,9 @@ class LoginActivity : AppCompatActivity() {
         
         viewModel = ViewModelProvider(this)[AuthViewModel::class.java]
 
-        val prefs = getSharedPreferences("haui_prefs", MODE_PRIVATE)
-        if (prefs.getString("token", null) != null) {
+        // ✅ Bug #1 Fix: Dùng AppPrefs constants thay magic string
+        val prefs = getSharedPreferences(AppPrefs.PREF_MAIN, MODE_PRIVATE)
+        if (prefs.getString(AppPrefs.KEY_TOKEN, null) != null) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -57,15 +58,21 @@ class LoginActivity : AppCompatActivity() {
         }
 
         viewModel.error.observe(this) { msg ->
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            // ✅ Warn #2 Fix: reset error sau khi show để tránh hiển lại sau rotation
+            if (!msg.isNullOrEmpty()) {
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+                viewModel.clearError()
+            }
         }
 
         viewModel.loginResult.observe(this) { result ->
             if (result?.status == "SUCCESS") {
-                getSharedPreferences("haui_prefs", MODE_PRIVATE).edit()
-                    .putString("token", result.token ?: "")
-                    .putString("username", binding.etUsername.text.toString().trim())
-                    .putString("accountId", result.accountId ?: "")
+                // ✅ Bug #1 Fix: Dùng AppPrefs + lưu KEY_ROLE để phân quyền Admin
+                getSharedPreferences(AppPrefs.PREF_MAIN, MODE_PRIVATE).edit()
+                    .putString(AppPrefs.KEY_TOKEN, result.token ?: "")
+                    .putString(AppPrefs.KEY_USERNAME, binding.etUsername.text.toString().trim())
+                    .putString(AppPrefs.KEY_ACCOUNT_ID, result.accountId ?: "")
+                    .putString(AppPrefs.KEY_ROLE, result.role ?: "")  // ✅ Lưu role để HoSoFragment hiện nút Admin
                     .apply()
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()

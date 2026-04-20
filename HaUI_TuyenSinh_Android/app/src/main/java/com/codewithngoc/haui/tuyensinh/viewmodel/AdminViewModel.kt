@@ -47,7 +47,9 @@ class AdminViewModel : ViewModel() {
                 val res = repository.getTaiKhoan().awaitResponse()
                 if (res.isSuccessful && res.body()?.status == "SUCCESS")
                     _users.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -62,7 +64,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = ApiClient.instance.getAllNganhHoc().awaitResponse()
                 if (res.isSuccessful) _nganhHocList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -85,7 +89,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = ApiClient.instance.getTinTuc().awaitResponse()
                 if (res.isSuccessful) _tinTucList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -108,7 +114,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = ApiClient.instance.getHocPhi().awaitResponse()
                 if (res.isSuccessful) _hocPhiList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -131,7 +139,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = ApiClient.instance.getQuyTrinh().awaitResponse()
                 if (res.isSuccessful) _quyTrinhList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -154,7 +164,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = ApiClient.instance.getHocBong().awaitResponse()
                 if (res.isSuccessful) _hocBongList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -177,7 +189,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = ApiClient.instance.getChiTieu(maNganh).awaitResponse()
                 if (res.isSuccessful) _chiTieuList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -200,7 +214,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = ApiClient.instance.getNgheNghiep(maNganh).awaitResponse()
                 if (res.isSuccessful) _ngheNghiepList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }
@@ -223,7 +239,9 @@ class AdminViewModel : ViewModel() {
             try {
                 val res = repository.getPhuongThuc().awaitResponse()
                 if (res.isSuccessful) _phuongThucList.postValue(res.body()?.data ?: emptyList())
-            } catch (_: Exception) {
+                else _actionStatus.postValue(GenericResponse("ERROR", "Lỗi HTTP ${res.code()}"))
+            } catch (e: Exception) {
+                _actionStatus.postValue(GenericResponse("ERROR", "Lỗi kết nối: ${e.localizedMessage}"))
             } finally { _isLoading.postValue(false) }
         }
     }

@@ -152,7 +152,13 @@ class AdminChiTieuManageActivity : AppCompatActivity() {
         val etNam = addField("Năm", item.nam ?: "")
         val etPhuongThuc = addField("Phương thức xét tuyển", item.phuongThuc ?: "")
         view.findViewById<android.widget.Button>(R.id.btnDialogSave).setOnClickListener {
-            viewModel.updateChiTieu(item.nam ?: "", etSoLuong.text.toString().trim(), etNam.text.toString().trim(), etPhuongThuc.text.toString().trim())
+            // ✅ Bug #2 Fix: dùng item.id thay item.nam để update đúng bản ghi
+            val chiTieuId = item.id
+            if (chiTieuId.isNullOrEmpty()) {
+                Toast.makeText(this, "Lỗi: Không tìm thấy ID chỉ tiêu", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            viewModel.updateChiTieu(chiTieuId, etSoLuong.text.toString().trim(), etNam.text.toString().trim(), etPhuongThuc.text.toString().trim())
             dialog.dismiss()
         }
         view.findViewById<android.widget.Button>(R.id.btnDialogCancel).setOnClickListener { dialog.dismiss() }
@@ -160,10 +166,16 @@ class AdminChiTieuManageActivity : AppCompatActivity() {
     }
 
     private fun showDeleteConfirm(item: ChiTieuItem) {
+        // ✅ Bug #2 Fix: dùng item.id thay item.nam để delete đúng bản ghi
+        val chiTieuId = item.id
+        if (chiTieuId.isNullOrEmpty()) {
+            Toast.makeText(this, "Lỗi: Không tìm thấy ID chỉ tiêu", Toast.LENGTH_SHORT).show()
+            return
+        }
         AlertDialog.Builder(this)
             .setTitle("Xác nhận xóa")
             .setMessage("Xóa chỉ tiêu năm ${item.nam}?")
-            .setPositiveButton("Xóa") { _, _ -> viewModel.deleteChiTieu(item.nam ?: "") }
+            .setPositiveButton("Xóa") { _, _ -> viewModel.deleteChiTieu(chiTieuId) }
             .setNegativeButton("Hủy", null).show()
     }
 }

@@ -80,20 +80,36 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupBottomNavigation() {
-        binding.bottomNavigation.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home    -> { replaceFragment(HomeFragment()); true }
-                R.id.nav_news    -> { replaceFragment(NganhHocFragment()); true }
-                R.id.nav_profile -> { replaceFragment(HoSoFragment()); true }
-                else             -> false
-            }
-        }
-    }
+    // ✅ Warn #5 Fix: Singleton fragments — show/hide thay vì new instance mỗi lần
+    // Giữ nguyên Fragment state (scroll, data) khi đổi tab, API không gọi lại
+    private val homeFragment = HomeFragment()
+    private val nganhHocFragment = NganhHocFragment()
+    private val hoSoFragment = HoSoFragment()
+    private var activeFragment: Fragment = homeFragment
 
-    private fun replaceFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
-            .commit()
+    private fun setupBottomNavigation() {
+        // Thêm tất cả fragments ngay từ đầu, ẩn những cái không phải home
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContainer, hoSoFragment).hide(hoSoFragment)
+            add(R.id.fragmentContainer, nganhHocFragment).hide(nganhHocFragment)
+            add(R.id.fragmentContainer, homeFragment)
+        }.commit()
+
+        binding.bottomNavigation.setOnItemSelectedListener { item ->
+            val target: Fragment = when (item.itemId) {
+                R.id.nav_home    -> homeFragment
+                R.id.nav_news    -> nganhHocFragment
+                R.id.nav_profile -> hoSoFragment
+                else             -> return@setOnItemSelectedListener false
+            }
+            if (target != activeFragment) {
+                supportFragmentManager.beginTransaction()
+                    .hide(activeFragment)
+                    .show(target)
+                    .commit()
+                activeFragment = target
+            }
+            true
+        }
     }
 }

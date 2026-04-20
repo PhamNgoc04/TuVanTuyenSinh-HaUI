@@ -23,8 +23,11 @@ class AuthViewModel : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _error = MutableLiveData<String>()
-    val error: LiveData<String> = _error
+    // ✅ Warn #2 Fix: Dùng String? để có thể reset về null sau khi show Toast
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> = _error
+
+    fun clearError() { _error.value = null }
 
     fun login(req: LoginRequest) {
         viewModelScope.launch(Dispatchers.IO) {

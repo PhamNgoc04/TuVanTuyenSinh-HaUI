@@ -30,6 +30,16 @@ class HoSoFragment : Fragment() {
     private var accountId = ""
     private lateinit var viewModel: ProfileViewModel
 
+    // ✅ Warn #3 Fix: Chỉ reload profile khi EditProfile trả về RESULT_OK
+    private val editProfileLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == android.app.Activity.RESULT_OK && accountId.isNotEmpty()) {
+            binding.progressBar.visibility = View.VISIBLE
+            viewModel.loadProfile(accountId)
+        }
+    }
+
     private val pickMedia = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
         if (uri != null) {
             try {
@@ -83,7 +93,8 @@ class HoSoFragment : Fragment() {
         }
 
         binding.btnEditProfile.setOnClickListener {
-            startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+            // ✅ Warn #3 Fix: Dùng launcher thay startActivity để biết khi nào cần reload
+            editProfileLauncher.launch(Intent(requireContext(), EditProfileActivity::class.java))
         }
 
         val themePrefs = requireActivity().getSharedPreferences(AppPrefs.PREF_THEME, Context.MODE_PRIVATE)
@@ -151,10 +162,8 @@ class HoSoFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (accountId.isNotEmpty()) {
-            binding.progressBar.visibility = View.VISIBLE
-            viewModel.loadProfile(accountId)
-        }
+        // ✅ Warn #3 Fix: Không reload API mỗi lần onResume — chỉ load lần đầu qua onViewCreated
+        // Việc reload sau Edit được xử lý bởi editProfileLauncher
     }
 
     override fun onDestroyView() {

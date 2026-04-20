@@ -24,6 +24,8 @@ class AiChatActivity : AppCompatActivity() {
     private val messages = mutableListOf<ChatMessage>()
     private lateinit var adapter: ChatAdapter
     private lateinit var viewModel: ChatViewModel
+    // ✅ Bug #3 Fix: Track index của loading message, tránh thêm trung lặp sau rotation
+    private var loadingMessageIndex = -1
 
     // ✅ Fix #2: Dùng ActivityResultLauncher thay vì startActivityForResult (deprecated)
     private val speechLauncher = registerForActivityResult(
@@ -84,23 +86,39 @@ class AiChatActivity : AppCompatActivity() {
 
     private fun setupObservers() {
         viewModel.aiResponse.observe(this) { response ->
+            // Xóa loading message khi có response
+            removeLoadingMessage()
             binding.btnSend.isEnabled = true
             if (response != null) {
                 addMessage(ChatMessage(response.reply ?: "Xin lỗi, AI không có phản hồi.", false))
             }
         }
         viewModel.isLoading.observe(this) { loading ->
-            if (loading) {
+            // ✅ Bug #3 Fix: Chỉ thêm loading message nếu chưa có, xóa khi xong
+            if (loading && loadingMessageIndex == -1) {
+                loadingMessageIndex = messages.size
                 addMessage(ChatMessage("⏳ Đang suy nghĩ...", false))
-                binding.btnSend.isEnabled = false
+            } else if (!loading) {
+                removeLoadingMessage()
             }
+            binding.btnSend.isEnabled = !loading
         }
         // ✅ Fix #3: Error hiển thị cho người dùng thay vì im lặng
         viewModel.error.observe(this) { msg ->
             if (!msg.isNullOrEmpty()) {
+                removeLoadingMessage()
                 binding.btnSend.isEnabled = true
                 addMessage(ChatMessage("⚠️ $msg", false))
             }
+        }
+    }
+
+    /** Xóa loading message khỏi list nếu đang hiển thị */
+    private fun removeLoadingMessage() {
+        if (loadingMessageIndex != -1 && loadingMessageIndex < messages.size) {
+            messages.removeAt(loadingMessageIndex)
+            adapter.notifyItemRemoved(loadingMessageIndex)
+            loadingMessageIndex = -1
         }
     }
 

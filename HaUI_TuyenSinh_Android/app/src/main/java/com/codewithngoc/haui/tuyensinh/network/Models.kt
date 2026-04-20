@@ -57,6 +57,7 @@ data class NgheNghiepListResponse(val status: String, val data: List<NgheNghiepI
 
 // ===== CHI TIEU =====
 data class ChiTieuItem(
+    val id: String?,          // ✅ Bug #2 Fix: thêm id để CRUD đúng endpoint
     val nam: String?,
     val soLuong: String?,
     val phuongThuc: String?
