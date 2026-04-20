@@ -29,6 +29,7 @@
 
         <activity android:name=".ui.main.MainActivity" android:exported="false" />
         <activity android:name=".ui.main.TinTucDetailActivity" android:exported="false" />
+        <activity android:name=".ui.main.TinTucListActivity" android:exported="false" />
         <activity android:name=".ui.info.ThongTinThietYeuActivity" android:exported="false" />
         <activity android:name=".ui.profile.EditProfileActivity" android:exported="false" />
         <activity android:name=".ui.admin.AdminDashboardActivity" android:exported="false" />

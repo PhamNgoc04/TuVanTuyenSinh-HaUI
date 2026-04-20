@@ -39,9 +39,9 @@ class HomeFragment : Fragment() {
         binding.rvTinTuc.isNestedScrollingEnabled = false
 
         binding.tvXemTatCa.setOnClickListener {
-            requireActivity()
-                .findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
-                .selectedItemId = R.id.nav_news
+            // ✅ Fix: navigate đến màn hình danh sách tin tức riêng
+            // thay vì chuyển sang tab Ngành Học (nav_news) — sai UX
+            startActivity(android.content.Intent(requireContext(), TinTucListActivity::class.java))
         }
 
         setupObservers()
