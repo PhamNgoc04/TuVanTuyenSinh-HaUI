@@ -8,6 +8,7 @@ import com.codewithngoc.haui.tuyensinh.network.ApiClient
 class HaUIApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+        appContext = this
 
         // Khởi tạo ApiClient với context để dùng SharedPreferences lấy token
         ApiClient.init(this)
@@ -19,5 +20,10 @@ class HaUIApplication : Application() {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
+    }
+
+    companion object {
+        lateinit var appContext: Context
+            private set
     }
 }

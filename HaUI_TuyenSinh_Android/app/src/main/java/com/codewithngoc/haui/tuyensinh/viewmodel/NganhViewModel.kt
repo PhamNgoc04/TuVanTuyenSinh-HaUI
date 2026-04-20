@@ -9,6 +9,8 @@ import com.codewithngoc.haui.tuyensinh.repository.NganhRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.awaitResponse
+import com.codewithngoc.haui.tuyensinh.HaUIApplication
+import com.codewithngoc.haui.tuyensinh.data.LocalCache
 
 class NganhViewModel : ViewModel() {
     private val repository = NganhRepository()
@@ -35,15 +37,25 @@ class NganhViewModel : ViewModel() {
     val isLoading: LiveData<Boolean> = _isLoading
 
     fun loadAllNganhHoc() {
+        val context = HaUIApplication.appContext
+
+        // Đổ data Cache lên UI ngay lập tức
+        LocalCache.getNganhHoc(context)?.let { _nganhList.postValue(it) }
+
         viewModelScope.launch(Dispatchers.IO) {
             _isLoading.postValue(true)
             try {
                 val res = repository.getAllNganhHoc().awaitResponse()
                 if (res.isSuccessful) {
-                    _nganhList.postValue(res.body()?.data ?: emptyList())
+                    val newData = res.body()?.data ?: emptyList()
+                    _nganhList.postValue(newData)
+                    LocalCache.saveNganhHoc(context, newData) // Lưu cache mới nhất
                 }
             } catch (e: Exception) {
-                // error
+                // Ignore silent catch - báo lỗi nếu chưa có cache
+                if (_nganhList.value.isNullOrEmpty()) {
+                    // Không có cache, không có mạng
+                }
             } finally {
                 _isLoading.postValue(false)
             }
