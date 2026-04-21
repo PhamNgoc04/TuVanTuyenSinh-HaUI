@@ -108,9 +108,10 @@ def find_answer(user_query: str) -> str:
     if not client:
         return "Xin lỗi, chưa cấu hình API Key của Google. Vui lòng kiểm tra file .env 🙏"
     try:
-        print(f"🤖 Calling Gemini for: '{user_query}'")
+        print(f"🤖 Calling Gemini (gemini-1.5-flash) for: '{user_query}'")
+        # ✅ Đổi sang gemini-1.5-flash vì giới hạn Free Tier RỘNG RÃI hơn khi nhồi file dữ liệu to
         response = client.models.generate_content(
-            model='gemini-2.0-flash-lite',
+            model='gemini-1.5-flash',
             contents=user_query,
             config=types.GenerateContentConfig(
                 system_instruction=sys_instruct,
@@ -119,7 +120,10 @@ def find_answer(user_query: str) -> str:
         return response.text
     except Exception as e:
         print(f"❌ Gemini error: {e}")
-        return f"Xin lỗi Mộc Lan đang bận, bạn thử lại sau nhé 😔 (Lỗi: {str(e)})"
+        error_msg = str(e)
+        if '429' in error_msg or 'RESOURCE_EXHAUSTED' in error_msg:
+            return "Dạ do số lượng tân sinh viên hỏi đông quá nên Mộc Lan đang bị nghẽn mạng xíu (hết hạn mức API), bạn chờ 1 phút rồi hỏi lại nhé! 😭"
+        return f"Xin lỗi Mộc Lan đang bận, bạn thử lại sau nhé 😔 (Lỗi hệ thống AI)"
 
 @app.get("/")
 def read_root():
