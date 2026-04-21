@@ -108,10 +108,10 @@ def find_answer(user_query: str) -> str:
     if not client:
         return "Xin lỗi, chưa cấu hình API Key của Google. Vui lòng kiểm tra file .env 🙏"
     try:
-        print(f"🤖 Calling Gemini (gemini-1.5-flash) for: '{user_query}'")
-        # ✅ Đổi sang gemini-1.5-flash vì giới hạn Free Tier RỘNG RÃI hơn khi nhồi file dữ liệu to
+        print(f"🤖 Calling Gemini (gemini-2.0-flash) for: '{user_query}'")
+        # ✅ Đổi sang gemini-2.0-flash (chuẩn xịn, không báo 404 và hạn mức to hơn bản lite cũ)
         response = client.models.generate_content(
-            model='gemini-1.5-flash',
+            model='gemini-2.0-flash',
             contents=user_query,
             config=types.GenerateContentConfig(
                 system_instruction=sys_instruct,
