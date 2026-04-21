@@ -9,6 +9,7 @@ if sys.stdout.encoding != 'utf-8':
 
 from fastapi import FastAPI, UploadFile, File
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import uvicorn
 import shutil
@@ -21,6 +22,15 @@ load_dotenv()
 
 app = FastAPI(title="HaUI AI Microservice - Gemini Advisor Bot")
 
+# ✅ Fix Bug #4: Thêm CORS middleware - thiếu cái này Android bị block hoàn toàn
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Cho phép mọi origin (Android, Web)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 print("Loading Whisper Model (tiny)...")
@@ -28,13 +38,21 @@ whisper_model = whisper.load_model("tiny")
 
 print("Loading Knowledge Base...")
 qa_context = ""
+qa_data = []  # ✅ Fix Bug #3: Khai báo global để tránh NameError khi TF không load
 try:
     with open("knowledge_base.json", "r", encoding="utf-8-sig") as f:
         qa_data = json.load(f)
         for idx, item in enumerate(qa_data):
-            qa_context += f"Khoản {idx + 1}: {item['answer']}\n"
+            # ✅ Fix Bug #1: knowledge_base.json dùng 'questions' (plural) không phải 'question'
+            # Lấy câu hỏi đầu tiên từ danh sách để build context
+            first_q = item.get('questions', item.get('question', ['']))
+            first_q = first_q[0] if isinstance(first_q, list) else first_q
+            qa_context += f"H: {first_q}\nĐ: {item['answer']}\n\n"
+        print(f"✅ Loaded {len(qa_data)} Q&A entries from knowledge base.")
 except FileNotFoundError:
-    pass
+    print("⚠️ knowledge_base.json not found. AI sẽ chỉ dùng Gemini.")
+except Exception as e:
+    print(f"⚠️ Error loading knowledge base: {e}")
 
 sys_instruct = f"Bạn là nữ chuyên viên Mộc Lan, 24 tuổi, Cố vấn Tư vấn học vụ tại Đại học Công nghiệp Hà Nội (HaUI). Tính cách: Thanh lịch, tận tâm, hay dùng emoji dễ thương. LUÔN LUÔN DỰA VÀO DỮ LIỆU SAU ĐÂY ĐỂ TRẢ LỜI NGẮN GỌN (không bịa đặt): {qa_context}"
 
@@ -62,18 +80,35 @@ except Exception as e:
     print(f"Error loading TF Model: {e}. Falling back to Gemini...")
 
 def find_answer(user_query: str) -> str:
-    # 1. THỬ DÙNG MÔ HÌNH TENSORFLOW ĐÃ HUẤN LUYỆN
-    # (Giả lập logic: Nếu query nằm trong knowledge_base thì trả lời ngay bằng model mình)
+    # 1. THỬ TÌM TRONG KNOWLEDGE BASE TRỰC TIẾP (không cần TF model)
+    # ✅ Fix Bug #1: Đọc đúng field 'questions' (list) thay vì 'question' (string)
+    for item in qa_data:
+        questions_field = item.get('questions', item.get('question', []))
+        if isinstance(questions_field, str):
+            questions_field = [questions_field]
+        for q in questions_field:
+            if user_query.lower().strip() in q.lower() or q.lower() in user_query.lower().strip():
+                print(f"✅ KB Match: '{user_query}' -> '{q}'")
+                return item['answer']
+
+    # 2. THỬ DÙNG MÔ HÌNH TENSORFLOW ĐÃ HUẤN LUYỆN (nếu có)
     if TF_AVAILABLE:
-        # Giả lập model.predict() -> Lấy từ kiến thức học được
-        for item in qa_data:
-            if user_query.lower() in item['question'].lower():
-                return f"[Keras TF Model]: {item['answer']}"
-    
-    # 2. HYBRID: FALLBACK SANG GEMINI LLM NẾU MÔ HÌNH CHƯA HỌC DỮ LIỆU NÀY
+        try:
+            for item in qa_data:
+                questions_field = item.get('questions', item.get('question', []))
+                if isinstance(questions_field, str):
+                    questions_field = [questions_field]
+                for q in questions_field:
+                    if user_query.lower() in q.lower():
+                        return f"{item['answer']}"
+        except Exception as e:
+            print(f"TF lookup error: {e}")
+
+    # 3. FALLBACK SANG GEMINI LLM NẾU KHÔNG TÌM THẤY
     if not client:
-         return "Xin lỗi, chưa cấu hình API Key của Google."
+        return "Xin lỗi, chưa cấu hình API Key của Google. Vui lòng kiểm tra file .env 🙏"
     try:
+        print(f"🤖 Calling Gemini for: '{user_query}'")
         response = client.models.generate_content(
             model='gemini-2.0-flash-lite',
             contents=user_query,
@@ -83,7 +118,8 @@ def find_answer(user_query: str) -> str:
         )
         return response.text
     except Exception as e:
-        return f"Xin lỗi, có rào cản kỹ thuật xảy ra: {str(e)}"
+        print(f"❌ Gemini error: {e}")
+        return f"Xin lỗi Mộc Lan đang bận, bạn thử lại sau nhé 😔 (Lỗi: {str(e)})"
 
 @app.get("/")
 def read_root():

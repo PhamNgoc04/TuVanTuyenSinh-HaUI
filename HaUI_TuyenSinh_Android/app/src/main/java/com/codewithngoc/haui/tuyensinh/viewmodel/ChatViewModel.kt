@@ -29,12 +29,27 @@ class ChatViewModel : ViewModel() {
             try {
                 val response = repository.askAi(AiChatRequest(query)).awaitResponse()
                 if (response.isSuccessful) {
-                    _aiResponse.postValue(response.body())
+                    val body = response.body()
+                    if (body != null && !body.reply.isNullOrEmpty()) {
+                        _aiResponse.postValue(body)
+                    } else {
+                        _error.postValue("⚠️ AI Service không trả về nội dung. Code: ${response.code()}")
+                    }
                 } else {
-                    _error.postValue("Lỗi phản hồi từ AI")
+                    // ✅ Phân biệt các loại lỗi HTTP
+                    val errMsg = when (response.code()) {
+                        404 -> "❌ Endpoint AI không tồn tại (404). Kiểm tra lại URL AI Service."
+                        500 -> "❌ AI Service bị lỗi nội bộ (500). Kiểm tra lại GEMINI_API_KEY."
+                        else -> "❌ Lỗi phản hồi từ AI (HTTP ${response.code()})"
+                    }
+                    _error.postValue(errMsg)
                 }
+            } catch (e: java.net.SocketTimeoutException) {
+                _error.postValue("⏰ AI Service phản hồi quá chậm. Bạn thử lại sau nhé!")
+            } catch (e: java.net.ConnectException) {
+                _error.postValue("📡 Không kết nối được AI Service. Kiểm tra: server đang chạy?  IP đúng?")
             } catch (e: Exception) {
-                _error.postValue("Lỗi kết nối AI Service")
+                _error.postValue("⚠️ Lỗi: ${e.localizedMessage ?: e.javaClass.simpleName}")
             } finally {
                 _isLoading.postValue(false)
             }

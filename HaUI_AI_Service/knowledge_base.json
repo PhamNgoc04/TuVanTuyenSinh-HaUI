@@ -1,22 +1,98 @@
-﻿[
+[
   {
-    "questions": ["Học phí Đại học Công nghiệp Hà Nội là bao nhiêu?", "hoc phi nganh cntt", "truong minh thu hoc phi bao nhieu"],
-    "answer": "Học phí Đại học Công nghiệp Hà Nội (HaUI) dao động từ 18 - 25 triệu đồng/năm học tùy thuộc vào ngành nghề và số tín chỉ bạn đăng ký."
+    "questions": ["Giới thiệu về trường", "truong haui la truong gi", "lich su truong", "tong quan ve truong", "đại học công nghiệp hà nội"],
+    "answer": "Đại học Công nghiệp Hà Nội (HaUI - Hanoi University of Industry) là trường đại học công lập lớn mạnh trực thuộc Bộ Công Thương, với bề dày lịch sử từ năm 1898. HaUI là trường đào tạo định hướng ứng dụng đa ngành, đa lĩnh vực, cung cấp nguồn nhân lực chất lượng cao hàng đầu khu vực miền Bắc trong cả hai khối ngành Kỹ thuật và Kinh tế."
   },
   {
-    "questions": ["Điểm chuẩn ngành Công nghệ thông tin là bao nhiêu?", "diem chuan nganh cntt la bn", "lay bao nhieu diem vao truong"],
-    "answer": "Điểm chuẩn ngành CNTT năm vừa qua là 25.5 điểm đối với phương thức xét điểm thi THPT. Điểm học bạ thường từ 28 điểm trở lên."
+    "questions": ["Trường có những cơ sở nào?", "dia chi truong o dau", "co so 1 o dau", "co so 2 o dau", "co so 3 o dau", "truong rông bao nhieu"],
+    "answer": "HaUI sở hữu không gian đào tạo rộng lớn với 3 cơ sở hiện đại: Cơ sở 1 (Trụ sở chính, rộng 5 hecta): Số 298 đường Cầu Diễn, Bắc Từ Liêm, Hà Nội. Cơ sở 2: P. Tây Tựu, Bắc Từ Liêm, Hà Nội. Cơ sở 3 (Rộng gần 30 hecta, đầu tư hàng ngàn tỷ đồng): Phường Lê Hồng Phong, Thành phố Phủ Lý, Tỉnh Hà Nam."
   },
   {
-    "questions": ["Trường có những cơ sở nào? Địa chỉ ở đâu?", "dia chi truong o dau", "truong co may tru so"],
-    "answer": "HaUI hiện có 3 cơ sở: Cơ sở 1 tại 298 đường Cầu Diễn, Bắc Từ Liêm, HN; Cơ sở 2 tại phường Tây Tựu, Bắc Từ Liêm, HN; và Cơ sở 3 tại Hà Nam."
+    "questions": ["Trường đào tạo những nhóm ngành nào?", "truong co nhung nganh gi", "có những khoa nào", "caác môn học", "khoa là nhừng khoa nao"],
+    "answer": "HaUI đào tạo hơn 50 ngành đại học chính quy thiết thực nhất, trực thuộc các khoa/viện lớn: Viện CNTT (Khoa học máy tính, KTPM, Hệ thống TT...); Khoa Động lực (Ô tô); Khoa Cơ khí (Cơ điện tử, Chế tạo máy...); Khoa Điện - Điện tử; Khoa Quản lý kinh doanh; Khoa Kế toán-Kiểm toán; Khoa Ngoại ngữ; Khoa Công nghệ Hóa; Khoa Công nghệ May & Thiết kế thời trang; Khoa Du lịch; và Trường Ngoại ngữ-Du lịch (Mới nâng cấp)."
   },
   {
-    "questions": ["Có những phương thức xét tuyển nào?", "phuong thuc xet tuyen la gi", "truong co xet hoc ba khong"],
-    "answer": "Trường tuyển sinh theo 5 phương thức: 1. Tuyển thẳng; 2. Xét thí sinh giỏi tuyến tỉnh/quốc gia; 3. Xét kết quả thi đánh giá năng lực ĐHQGHN; 4. Xét điểm thi THPT; 5. Xét học bạ THPT."
+    "questions": ["Top các ngành HOT nhất của trường là gì?", "nganh nao hot nhat", "xu huong nganh", "nganh the manh cua haui", "truong manh nhat nganh gi"],
+    "answer": "Các ngành học mang 'thương hiệu' và thuộc hàng TOP HOT nhất của HaUI luôn cháy chỉ tiêu gồm: 1. Các ngành thuộc Viện Công nghệ thông tin (điểm luôn cao nhất trường); 2. Công nghệ kỹ thuật Ô tô (Hàng đầu toàn quốc với cơ sở thực hành khổng lồ); 3. Cơ điện tử và Tự động hoá; 4. Khối Ngoại ngữ (đặc biệt Ngôn ngữ Trung Quốc, Hàn Quốc); 5. Kế toán, Kiểm toán."
   },
   {
-    "questions": ["Sinh viên có được học bổng không, điều kiện là gì?", "truong co hoc bong gi khong", "dieu kien nhan hoc bong"],
-    "answer": "Sinh viên đạt kết quả học tập và rèn luyện từ loại Khá trở lên (GPA > 2.5), không bị nợ môn thì sẽ được xét học bổng khuyến khích học tập theo học kỳ."
+    "questions": ["Trường có những phương thức xét tuyển nào?", "phuong thuc xet tuyen la gi", "nam nay truong tuye sinh theo cach nao", "xet hoc ba the nao"],
+    "answer": "Năm nay HaUI xét tuyển qua 6 phương thức: PT1: Xét tuyển thẳng theo quy chế Bộ GD&ĐT; PT2: Xét thí sinh đoạt giải học sinh giỏi cấp tỉnh/quốc gia hoặc chứng chỉ quốc tế (IELTS >= 5.5); PT3: Xét dựa trên điểm đánh giá năng lực của ĐHQGHN; PT4: Xét kết quả đánh giá tư duy ĐHBK Hà Nội; PT5: Xét điểm thi tốt nghiệp THPT cốt lõi; PT6: Xét Học bạ THPT (Điểm TB 3 học kỳ của 3 môn thuộc tổ hợp phải >= 7.0)."
+  },
+  {
+    "questions": ["Khối ngành Công nghệ thông tin (CNTT) gồm những ngành gì và lấy bao nhiêu điểm?", "diem chuan cntt", "khoa CNTT gom nhung nganh nao", "diem khoa học may tinh"],
+    "answer": "Viện CNTT của HaUI cung cấp các ngành: Khoa học máy tính, Kỹ thuật phần mềm, Hệ thống thông tin, Mạng máy tính và Truyền thông dữ liệu, Công nghệ kỹ thuật máy tính. Đây là nhóm có điểm xét tuyển THPT cao nhất trường (thường từ 25.0 - 26.5 điểm khối A00, A01) và điểm học bạ chạm ngưỡng 28.5 - 29.5 điểm! Ngành Khoa học máy tính luôn dẫn đầu bảng điểm chuẩn."
+  },
+  {
+    "questions": ["Điểm chuẩn Công nghệ kỹ thuật Ô tô", "nganh o to", "diem chuan khoa dong luc", "khoa oto hoc nhung gi"],
+    "answer": "Ngành Công nghệ Kỹ thuật Ô tô tại Khoa Cơ khí động lực là niềm tự hào của HaUI. Chương trình cực sát thực tế, liên kết với Toyota, Nissan, Honda. Điểm chuẩn THPT ổn định mức rất cao từ 24.5 - 25.5 điểm. Ngành Kỹ thuật cơ khí động lực cũng có điểm chuẩn lân cận ở mức 23-24 điểm."
+  },
+  {
+    "questions": ["Thông tin tuyển sinh khối ngành Điện - Điện tử, Tự động hóa", "diem chuan dien tu", "khoa dien hoc gi", "nganh tu dong hoa lay bao diem"],
+    "answer": "Khoa Điện - Điện tử cung cấp: Công nghệ kỹ thuật Điều khiển và Tự động hóa (hot nhất, điểm chuẩn ~24.5), Công nghệ kỹ thuật Điện, Điện tử (điểm ~23.5), Robot và trí tuệ nhân tạo (Ngành mới cực kỳ tiềm năng, xét tuyển ~24.0). Cơ hội việc làm khối này bao trùm các khu công nghiệp Samsung, Nidec, Canon."
+  },
+  {
+    "questions": ["Thông tin khối ngành Kinh tế (Kế toán, QTKD) độ HOT thế nào?", "diem chuan khoa kinh te", "ke toan haui lay bao diem", "qtkd haui", "khoa tai chinh ngan hang"],
+    "answer": "Mặc dù xuất phát điểm là trường kỹ thuật, khối Kinh tế của HaUI lớn mạnh thuộc top Thủ đô. Điểm chuẩn THPT mức: Quản trị Kinh doanh (24-24.5 điểm); Marketing (24.5-25 điểm), Kế toán (24.0), Tài chính - Ngân hàng (23.5-24). Môi trường sôi động, dễ dàng thực tập tại ngân hàng và doanh nghiệp."
+  },
+  {
+    "questions": ["Chi tiết tuyển sinh Khối ngành Ngôn ngữ và Du lịch", "diem chuan ngon ngu trung", "ngon ngu anh", "ngon ngu han co dau khong", "khoa du lich haui diem chuan"],
+    "answer": "Trường Ngoại ngữ - Du lịch (tiền thân là 2 khoa Ngoại ngữ và Du lịch) với các ngành hot nhất: Ngôn ngữ Trung Quốc (điểm chuẩn cao đột phá ~ 25.5 - 26 điểm trở lên tính hệ số); Ngôn ngữ Hàn Quốc, Tiếng Nhật, Tiếng Việt và VH Việt Nam. Điểm của khối này nhân đôi hệ số môn Ngoại ngữ nên thường ở mức trên thang 30 hoặc quy đổi."
+  },
+  {
+    "questions": ["Ngành Công nghệ May, Thiết kế thời trang học gì, ra có dễ xin việc?", "nganh may haui", "diem chuan thiet ke thoi trang", "ha ui dao tao may k"],
+    "answer": "HaUI có truyền thống cực lớn với Khoa Công nghệ May & Thiết kế Thời trang. Nhiều sinh viên vừa ra trường đã làm Tổ trưởng sản xuất tại TNG, May 10, Garco... Điểm chuẩn môn may công nghiệp/thiết kế thời trang thường rất dễ chịu, tầm 22 - 23 điểm (Khối A00, D01)."
+  },
+  {
+    "questions": ["Học phí Đại học Công nghiệp Hà Nội năm nay tính như nào?", "hoc phi bao nhieu", "tien hoc phi cntt", "4 nam ton bao nhieu tien hoc"],
+    "answer": "HaUI áp dụng mô hình cơ sở tự chủ tài chính nhưng mức học phí rất 'vì sinh viên'. Trung bình, học phí khối Kỹ thuật, Công nghệ dao động khoảng 22 - 25 triệu/năm học (do cần nhiều vật tư thí nghiệm). Khối Kinh tế, Ngôn ngữ khoảng 20 - 22 triệu/năm. Đơn giá trung bình khoảng 450.000 VNĐ - 550.000 VNĐ cho 1 tín chỉ tùy chuyên ngành."
+  },
+  {
+    "questions": ["Chính sách miễn giảm học phí cho hồ sơ khó khăn", "mien giam hoc phi", "nha em ngheo co dc xin giam hp khong", "con thuong binh co duoc giam hoc phi"],
+    "answer": "HaUI tuân thủ 100% nghị định 81/2021 của Chính phủ. Nếu bạn thuộc đối tượng: Con thương binh, liệt sĩ, người dân tộc thiểu số vùng đặc biệt khó khăn, người khuyết tật... sẽ được GIẢM hoặc MIỄN hoàn toàn học phí. Hồ sơ xét duyệt được Phòng Công tác sinh viên nhận vào ngay tháng nhập học đầu tiên."
+  },
+  {
+    "questions": ["Điều kiện và phân loại Học bổng tại HaUI", "hoc bong truong co nhung loai nao", "dieu kien nhan hoc bong", "hoc bong sinh vien xuat sac", "tan sinh vien co hoc bong ko"],
+    "answer": "1. Học bổng Đầu vào: Tặng 100% học phí năm đầu cho Thủ khoa toàn trường và thủ khoa các khối thi. 2. Học bổng Khuyến khích học tập (KKHT): Cấp từng kỳ cho sinh viên học Khá, Giỏi, Xuất sắc (Cận dưới GPA khoảng 2.8-3.2 tùy lượng sinh viên Khoa đó). 3. Học bổng doanh nghiệp: Do Foxconn, Honda, Nissan, Samsung tài trợ trực tiếp bằng tiền mặt hàng năm."
+  },
+  {
+    "questions": ["Thông tin chi tiết Ký túc xá HaUI", "ky tuc xa haui o dau", "phong ktx ha nam", "gia ktx co so 1", "dieu kien o ktx"],
+    "answer": "KTX HaUI có hệ thống siêu lớn: KTX Cơ sở 1 và KTX Hà Nam. Cơ sở Hà Nam (Hệ thống KTX đạt giải kiến trúc xanh) với phòng 4-6 người siêu đẹp, giường tầng riêng tư, nóng lạnh điều hòa. Tiền phòng RẤT RẺ, chỉ dao động 300.000đ - 650.000đ/tháng/slot. Ưu tiên 100% cho Tân sinh viên, bộ đội Phục viên, gia đình chính sách hoặc nhà cách trường xa."
+  },
+  {
+    "questions": ["Các chương trình Đào tạo liên kết quốc tế, Chất lượng cao", "khoa quoc te haui", "dao tao 2+2", "lien ket quoc te", "hoc bang tieng anh nguyen toan"],
+    "answer": "Trường có Trung tâm Đào tạo Quốc tế cung cấp các chương trình: 2+2 (2 năm HaUI, 2 năm nước ngoài nhận 2 bằng ĐH) liên kết với ĐH Giang Tô (Trung Quốc), ĐH Frostburg (Mỹ). Cơ hội nhận bằng quốc tế với chi phí vô cùng tiết kiệm. Đầu vào ưu tiên các sinh viên có IELTS từ 5.5."
+  },
+  {
+    "questions": ["Sinh viên HaUI ra trường tỷ lệ có việc làm ra sao?", "hoc haui co de xin viec khong", "co hoi viec lam cua truong", "truong co ket noi voi doanh nghiep ntn"],
+    "answer": "Thống kê của nhà trường, 95% sinh viên có việc làm ngay sau 6-8 tháng tốt nghiệp. Yếu tố cốt lõi là HaUI có 'Phòng Hợp tác doanh nghiệp' rất mạnh, liên kết hàng trăm công ty. Rất nhiều khối ngành Kỹ thuật như Động lực, Cơ khí được doanh nghiệp tới để 'cọc' tuyển sinh viên ngay khi các bạn đang làm Đồ án tốt nghiệp năm cuối."
+  },
+  {
+    "questions": ["Quy chế Ngoại ngữ bắt buộc và Tin học", "toeic dau ra la bn", "tin hoc dau ra", "co ki thi ngoai ngu k"],
+    "answer": "100% sinh viên khối không chuyên ngữ phải đạt Chuẩn đầu ra Tiếng Anh (thường tối thiểu 450 TOEIC cấp bởi IIG hoặc tổ chức nội bộ tương đương) và Chuẩn CNTT (Tin học cơ bản). Nếu không đạt, sinh viên chỉ được phát chứng nhận hoàn thành chương trình học chứ không được giao Bằng kỹ sư/Cử nhân."
+  },
+  {
+    "questions": ["Học ngành cơ khí, điện tử con gái có học được không?", "con gai hoc oto", "nu hoc co khi", "con gai hoc tu dong hoa", "truong nhieu nam the"],
+    "answer": "Hoàn toàn học được và được doanh nghiệp CỰC KỲ KHUYẾN KHÍCH! Nữ sinh khối Kỹ thuật, Cơ khí tại HaUI luôn được ưu tiên học bổng của trường và Doanh nghiệp (vì doanh nghiệp rất cần nữ kỹ sư để làm các khâu quản lý chất lượng, bộ phận thu mua, lập trình cho máy CNC). Hơn nữa các bạn nam viện Kỹ thuật... cực kỳ chiều các bạn nữ trong lớp."
+  },
+  {
+    "questions": ["Sinh hoạt Đoàn - Hội - CLB như thế nào?", "clb trong truong", "doi hien mau haui", "clb tin hoc haui"],
+    "answer": "HaUI có cuộc sống ngoại khóa bùng nổ với Hội sinh viên, Đoàn Thanh Niên và màng lưới 60+ Câu lạc bộ. Tiêu biểu: Đội Thanh niên Vận động hiến máu (đội máu đông nhất Miền Bắc), CLB Tin Học IT-HaUI, CLB Tiếng Anh (E-CLUB), CLB Âm Nhạc, Nhảy hiện đại,... Tham gia CLB rất quan trọng để có điểm rèn luyện tốt nhận học bổng."
+  },
+  {
+    "questions": ["Học kỳ Quốc phòng (Quân sự) ở đâu?", "di quan su ha nam", "quan su nam may", "an o trong khuc quan su ntn"],
+    "answer": "Kỳ học Quân sự của HaUI thường bố trí ngay cuối năm nhất hoặc hè năm 2. Đại đa số sẽ được hành quân xuống Trung tâm GDQP&AN tại Cơ sở 3 (Phủ Lý, Hà Nam) lưu trú tập trung trong 3-4 tuần. Đây là một trải nghiệm rèn luyện gian khổ nhưng đầy mồ hôi và kỷ niệm 'đẹp nhất thời sinh viên'."
+  },
+  {
+    "questions": ["Hướng dẫn làm hồ sơ nhập học cho Tân sinh viên", "thu tuc nhap hoc ntn", "ban can ban giay to gi", "khi nop ho so truc tiep"],
+    "answer": "Sau khi có giấy báo trúng tuyển (tra trực tuyến trên trang tuyensinh.haui.edu.vn), hồ sơ cơ bản cần: Học bạ bản sao công chứng; Căn cước công dân; Sơ yếu lý lịch có giấu đỏ địa phương; Bản chính Giấy chứng nhận ĐGNL hoặc kết quả thi; Bản sao Bằng tốt nghiệp THPT/Chứng nhận tạm thời."
+  },
+  {
+    "questions": ["Làm sao để liên hệ ban Tuyển sinh hỗ trợ nóng?", "sdt phong tuyen sinh", "quen mat khau web dang ky", "hotline truong ha ui"],
+    "answer": "Kênh liên hệ trực tiếp: Hotline phòng Quản lý Đào tạo: 0243.7655.121 (Số máy lẻ 277). Web chính thức: https://tuyensinh.haui.edu.vn/. Fanpage Facebook cấp xanh: 'Đại học Công nghiệp Hà Nội'. Bạn có thể inbox thẳng Fanpage nếu bị kẹt hệ thống khai báo hồ sơ, admin trường trực rất nhiệt tình trả lời."
+  },
+  {
+    "questions": ["Cho tôi hỏi bạn tên là gì?", "bot la ai", "Mộc Lan nha", "ai dang tu van t the"],
+    "answer": "Chào bạn nha! Mình là Mộc Lan (24 tuổi) - Chuyên viên AI Tư vấn tuyển sinh chính thức của Đại học Công nghiệp Hà Nội. Được đào tạo bởi khối dữ liệu trí tuệ nội sinh của trường, mình có khả năng trả lời bằng văn bản và cả giọng nói. Thắc mắc gì bạn cứ gõ hoặc bấm mic hỏi mình nhé! (╯✧▽✧)╯"
   }
 ]

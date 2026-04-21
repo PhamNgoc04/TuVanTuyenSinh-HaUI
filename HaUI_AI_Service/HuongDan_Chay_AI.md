@@ -15,6 +15,11 @@ AI Service được tách độc lập thành thư mục riêng khỏi Ktor. B�
 ```shell
 cd HaUI_AI_Service
 ```
+or 
+```shell
+cd d:\Mobile_Kotlin_DevPro\DACK\HaUI_AI_Service
+python main.py
+```
 
 ### Bước 1: Nạp Bộ Tham Số & Công Cụ Học Máy
 Chạy lệnh bên dưới để phần mềm tự động cài bộ cỗ máy **Sentence-Transformers, Pytorch và Whisper**.

@@ -9,7 +9,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
-    // Emulator: 10.0.2.2 | Device thật: IP máy tính
+    // ✅ Bug #2 Fix: Phân biệt rõ Emulator (10.0.2.2) và Device thật (IP máy tính)
+    // KHI TEST TRÊN EMULATOR - giữ nguyên
+    // KHI TEST TRÊN DEVICE THẬT - đổi sang IP WiFi của máy tính (VD: "http://192.168.1.x:8080")
     private const val CORE_BASE_URL = "http://10.0.2.2:8080"
     private const val AI_BASE_URL   = "http://10.0.2.2:8000"
 
@@ -38,9 +40,17 @@ object ApiClient {
             .build()
     }
 
-    /** Client cho AI Service (không cần auth) */
+    /** Client cho AI Service (không cần auth) + có timeout và logging để debug */
     private val basicClient: OkHttpClient by lazy {
-        OkHttpClient.Builder().build()
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
+        }
+        OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+            .readTimeout(60, java.util.concurrent.TimeUnit.SECONDS)  // AI có thể chậm
+            .writeTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+            .build()
     }
 
     val instance: ApiService by lazy {
