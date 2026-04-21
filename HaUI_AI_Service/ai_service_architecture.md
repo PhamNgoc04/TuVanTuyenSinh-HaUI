@@ -73,3 +73,32 @@ Nếu 2 phương pháp trên bó tay hoàn toàn, hệ thống đẩy nhiệm v�
 - **CORS Middleware:** Hệ thống sử dụng CORS `allow_origins=["*"]`. Tuy nhiên, vì giao tiếp Mobile/Server API được call bằng Retrofit client, phần lớn điều này là để khắc phục các tính năng kết nối Cross-domain với localhost trong quá trình gỡ lỗi Emulator/Điện thoại thật cục bộ.
 - **Biến môi trường (`.ENV`):** Chứa khóa bảo mật `GEMINI_API_KEY` của Google Cloud, thiết kế giấu trong file không Public lên git, chặn rò rỉ lộ Key tốn tiền cước dịch vụ.
 - **Fail-safe Exception:** Thiết kế mọi lúc cho tất cả Route trả về Message dự phòng. Đảm bảo UI di động bên kia Không bao giờ bị kẹt vòng lặp Loading xoay đều nếu có sự cố chết hàm cục bộ giữa chừng ở Model python.
+
+---
+
+## 5. Luồng Nghiệp Vụ Thực Tế Trong Tư Vấn Tuyển Sinh
+
+Bên cạnh luồng di chuyển dữ liệu Data Flow máy móc, ứng dụng áp dụng quy trình giải quyết vấn đề (Business Workflow) y hệt như một buổi tư vấn trực tiếp của Đoàn Thanh Niên/Phòng Đào tạo Hà Nội:
+
+### Bước 1: Tiếp nhận Khách hàng (Tân Sinh Viên/Phụ huynh)
+* **Kích hoạt:** Người dùng bật App Mobile, bấm vào icon "Hỏi AI".
+* **Xử lý tác phong:** AI Mộc Lan tự động gửi tin nhắn chào hỏi thân thiện đầu tiên `("Chào bạn! Mình là AI Tư vấn tuyển sinh HaUI 🎓...")`. Thiết lập tâm lý cởi mở, phá bỏ rào cản giữa máy móc và con người.
+
+### Bước 2: Phân loại Nhu cầu Tư Vấn (Classification Intent)
+Khi người dùng đặt câu hỏi, AI sẽ ngầm định quét qua 4 mảng nghiệp vụ cốt lõi của Tuyển sinh Đại học:
+1. **Nghiệp vụ Hỏi Đáp Thể Chế chung:** Lịch sử trường, địa chỉ 3 cơ sở, uy tín bằng cấp.
+2. **Nghiệp vụ Học vụ & Chương trình:** Chương trình liên kết 2+2, chuẩn đầu ra Tiếng Anh/Tin học, học song bằng.
+3. **Nghiệp vụ Tài chính Sinh viên:** Học phí, Lệ phí Ký túc xá, Học bổng Khuyến khích, Miễn giảm cho hồ sơ đặc biệt.
+4. **Nghiệp vụ Định hướng Tuyển sinh HOT:** Phân tích điểm chuẩn các ngành mũi nhọn (Tự động hóa, CNTT, Ngôn ngữ Trung), phương thức xét tuyển (Đánh giá năng lực vs Thi THPT vs Học bạ).
+
+### Bước 3: Tra cứu & Tư vấn Đặc thù (Domain Context)
+* AI vận dụng bộ Bách khoa Tri thức Sinh viên nội bộ (từ JSON) mang tính cục bộ (Locality). 
+* Khác với các AI đại chúng thường khuyên chung chung "Nên tìm hiểu ngành CNTT do bắt kịp xu hướng", Mộc Lan sẽ khuyên **rất "đời thực"**: *"Trường có tiếng về Cơ Điện tử và Kỹ thuật Ô tô từ lâu, ra trường doanh nghiệp tới tận nơi rinh người. Nhưng nếu chọn CNTT, khối điểm thi luôn cháy ở mức 26đ..."*.
+* Điều này đánh trúng tâm lý cần sự chân thực của Học sinh cấp 3.
+
+### Bước 4: Xử lý ngoại lệ, Chăm sóc Cảm xúc Khách hàng
+* Nếu người dùng hỏi những thông tin ngoài vòng kiểm soát đào tạo (Ví dụ: Tâm sự tuổi hồng, căng thẳng mùa thi, hoặc bị lạc đường trường).
+* Kịch bản rào chắn: AI tự biết mình là *Chuyên viên tư vấn điểm thi*, nó sẽ lịch sự kéo câu chuyện về phía tuyển sinh, hoặc hạ giọng xin lỗi nếu không có dữ liệu, thay vì bịa ra một mức học phí sai làm mất uy tín nhà trường.
+
+### Bước 5: Chốt phiên tư vấn (Call to Action)
+Nghiệp vụ AI của trường không chỉ giải đáp thỏa mãn, mà trong ngữ cảnh câu trả lời luôn mở ra định hướng: Nhắc nhở sĩ tử xem kỹ trang Web bộ GD&ĐT, hoặc ném thẳng Hotline Phòng Quản lý Đào tạo `0243.7655.121` cho các tai nạn hồ sơ khẩn cấp (như việc điền sai hệ thống nguyện vọng). Đảm bảo vòng đời CSKH (Customer Service) đạt điểm trọn vẹn.
